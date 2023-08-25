@@ -1,3 +1,5 @@
+USE OFFICE;
+
 CREATE PROCEDURE InsertStudent
 	@StudentID INT,
     @FirstName VARCHAR(50),
@@ -11,4 +13,6 @@ BEGIN
 END;
 
 
-EXEC InsertStudent 11,'Joel', 'Jacob', 'joel@example.com', 101;
+EXEC InsertStudent 12,'Joe', 'Jacob', 'joel@example.com', 101;
+
+select * from Students;

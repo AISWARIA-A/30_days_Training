@@ -1,5 +1,5 @@
 USE OFFICE;
--- Create Students Table
+
 
 -- Create Enrolled Courses Table
 CREATE TABLE Courses (
@@ -16,6 +16,7 @@ VALUES
     (103, 'Physics', 'Dr. Sreela'),
     (104, 'Computer Science', 'Prof. Tina');
 
+-- Create Students Table
 CREATE TABLE Students (
     StudentID INT PRIMARY KEY,
     FirstName VARCHAR(50),
@@ -60,8 +61,3 @@ FROM Students RIGHT JOIN Courses ON Students.CourseID = Courses.CourseID;
 SELECT Students.StudentID, Students.FirstName , Students.LastName ,
 Courses.CourseName, Courses.Instructor 
 FROM Students FULL OUTER JOIN Courses ON Students.CourseID = Courses.CourseID;
-
--- SELF JOIN: Retrieve students who share the same last name.
-SELECT s1.StudentID, s1.FirstName, s1.LastName, s2.StudentID AS RelativeID, s2.FirstName AS RelativeFirstName, s2.LastName AS RelativeLastName
-FROM Students s1
-JOIN Students s2 ON s1.LastName = s2.LastName AND s1.StudentID <> s2.StudentID;

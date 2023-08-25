@@ -1,3 +1,5 @@
+USE OFFICE;
+
 CREATE PROCEDURE DeleteStudent
     @StudentID INT
 AS

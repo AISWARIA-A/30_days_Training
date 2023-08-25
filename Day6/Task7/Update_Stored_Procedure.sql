@@ -1,3 +1,5 @@
+USE OFFICE;
+
 CREATE PROCEDURE UpdateStudent
     @StudentID INT,
     @FirstName VARCHAR(50),
@@ -14,4 +16,5 @@ BEGIN
     WHERE StudentID = @StudentID;
 END;
 
-EXEC UpdateStudent 1, 'Kapil', 'Sharma', 'Kapil@example.com', 103;
+EXEC UpdateStudent 1, 'Kapil', 'Sharma', 'Kapil@example.com', 102;
+
