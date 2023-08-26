@@ -1,0 +1,12 @@
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.csproj.AssemblyReference.cache
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.Form1.resources
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.Properties.Resources.resources
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.csproj.GenerateResource.cache
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.csproj.CoreCompileInputs.cache
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\bin\Debug\CRUDOperations.exe.config
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\bin\Debug\CRUDOperations.exe
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\bin\Debug\CRUDOperations.pdb
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.exe
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\obj\Debug\CRUDOperations.pdb
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\bin\Debug\EDUHUB.mdf
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\CRUDOperations\CRUDOperations\bin\Debug\EDUHUB_log.ldf

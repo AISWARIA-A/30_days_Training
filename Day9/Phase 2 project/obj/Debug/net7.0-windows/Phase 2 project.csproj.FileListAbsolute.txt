@@ -1,0 +1,4 @@
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Phase 2 project\obj\Debug\net7.0-windows\Phase 2 project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Phase 2 project\obj\Debug\net7.0-windows\Phase 2 project.AssemblyInfoInputs.cache
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Phase 2 project\obj\Debug\net7.0-windows\Phase 2 project.AssemblyInfo.cs
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Phase 2 project\obj\Debug\net7.0-windows\Phase 2 project.csproj.CoreCompileInputs.cache
