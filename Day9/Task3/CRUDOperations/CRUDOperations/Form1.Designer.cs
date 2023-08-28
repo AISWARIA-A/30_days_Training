@@ -38,21 +38,21 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.eDUHUBDataSet = new CRUDOperations.EDUHUBDataSet();
-            this.studentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.studentsTableAdapter = new CRUDOperations.EDUHUBDataSetTableAdapters.StudentsTableAdapter();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fatherNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.studentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.eDUHUBDataSet = new CRUDOperations.EDUHUBDataSet();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.studentsTableAdapter = new CRUDOperations.EDUHUBDataSetTableAdapters.StudentsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eDUHUBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eDUHUBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -135,63 +135,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(544, 150);
             this.dataGridView1.TabIndex = 10;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button1.Location = new System.Drawing.Point(51, 218);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 37);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Insert";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button2.Location = new System.Drawing.Point(235, 218);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 37);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button3.Location = new System.Drawing.Point(443, 218);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(117, 37);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button4.Location = new System.Drawing.Point(629, 218);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(117, 37);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Reset";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // eDUHUBDataSet
-            // 
-            this.eDUHUBDataSet.DataSetName = "EDUHUBDataSet";
-            this.eDUHUBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // studentsBindingSource
-            // 
-            this.studentsBindingSource.DataMember = "Students";
-            this.studentsBindingSource.DataSource = this.eDUHUBDataSet;
-            // 
-            // studentsTableAdapter
-            // 
-            this.studentsTableAdapter.ClearBeforeFill = true;
-            // 
             // idDataGridViewTextBoxColumn
             // 
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -223,6 +166,64 @@
             this.phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
             this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             // 
+            // studentsBindingSource
+            // 
+            this.studentsBindingSource.DataMember = "Students";
+            this.studentsBindingSource.DataSource = this.eDUHUBDataSet;
+            // 
+            // eDUHUBDataSet
+            // 
+            this.eDUHUBDataSet.DataSetName = "EDUHUBDataSet";
+            this.eDUHUBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button1.Location = new System.Drawing.Point(51, 218);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(117, 37);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Insert";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button2.Location = new System.Drawing.Point(235, 218);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(117, 37);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Update";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button3.Location = new System.Drawing.Point(443, 218);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(117, 37);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Delete";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button4.Location = new System.Drawing.Point(629, 218);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(117, 37);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Reset";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // studentsTableAdapter
+            // 
+            this.studentsTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(770, 432);
@@ -243,8 +244,8 @@
             this.Text = "Student information ";
             this.Load += new System.EventHandler(this.Form1_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eDUHUBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eDUHUBDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
