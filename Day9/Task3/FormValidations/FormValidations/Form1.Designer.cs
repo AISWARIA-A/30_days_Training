@@ -93,6 +93,7 @@
             button1.TabIndex = 5;
             button1.Text = "E&xit";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -105,6 +106,7 @@
             button2.TabIndex = 6;
             button2.Text = "Log in";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label3
             // 
@@ -114,6 +116,7 @@
             label3.Size = new Size(134, 15);
             label3.TabIndex = 7;
             label3.Text = "Not a member? Register";
+            label3.Click += label3_Click;
             // 
             // Form1
             // 
