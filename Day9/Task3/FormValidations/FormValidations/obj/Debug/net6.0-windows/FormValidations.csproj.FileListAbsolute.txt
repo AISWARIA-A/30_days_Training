@@ -49,3 +49,4 @@ C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\FormValidations\FormVali
 C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\FormValidations\FormValidations\obj\Debug\net6.0-windows\FormValidations.pdb
 C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\FormValidations\FormValidations\obj\Debug\net6.0-windows\FormValidations.genruntimeconfig.cache
 C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\FormValidations\FormValidations\obj\Debug\net6.0-windows\ref\FormValidations.dll
+C:\Users\Aiswaria A\Desktop\30_days_Training\Day9\Task3\FormValidations\FormValidations\obj\Debug\net6.0-windows\FormValidations.Form2.resources
