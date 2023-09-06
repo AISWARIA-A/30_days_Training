@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LibraryImageApp.Models.Book>
+
+@{
+    ViewBag.Title = "Library";
+}
+
+<h2>Library</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddDetails")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @{
+                if (item.Cover != null)
+                {
+                    string base64string = Convert.ToBase64String(item.Cover);
+                    <img src="data:image;base64,@base64string" alt="Book Cover"/>
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditDetails", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteDetails", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>
