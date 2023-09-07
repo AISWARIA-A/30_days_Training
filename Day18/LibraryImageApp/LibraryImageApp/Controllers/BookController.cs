@@ -25,37 +25,11 @@ namespace LibraryImageApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddDetails(Book book)
+        public ActionResult AddDetails(Book book, HttpPostedFileBase image)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    HttpPostedFileBase image = Request.Files["CoverImage"];
-
-                    if (image != null && image.ContentLength > 0)
-                    {
-                        using (var binaryReader = new BinaryReader(image.InputStream))
-                        {
-                            book.Cover = binaryReader.ReadBytes(image.ContentLength);
-                        }
-
-                        if (bookRepository.AddBooks(book, image))
-                        {
-                            ViewBag.Message = "Book details added successfully";
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Cover", "Please select a valid cover image.");
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            BookRepository bookRepository = new BookRepository();
+            bookRepository.AddBooks(book, image);
+            return RedirectToAction("Index");
         }
 
 
@@ -91,6 +65,18 @@ namespace LibraryImageApp.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+
+        private bool IsImage(HttpPostedFileBase Photo)
+        {
+            if (Photo != null && Photo.ContentLength > 0)
+            {
+                string[] allowedImageTypes = { "image/jpeg", "image/png", "image/gif" };
+                string contentType = Photo.ContentType;
+
+                return allowedImageTypes.Contains(contentType);
+            }
+            return false;
         }
     }
 }

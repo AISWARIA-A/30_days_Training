@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in page</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+  <body>
+        <div class="navbar">
+      <div class="logo">
+        <img src="./images/logo.png" />
+        <h4>EDUHUB</h4>
+      </div>
+      <div class="menu">
+        <a href="home.html">Home</a>
+        <a href="about.html">About us</a>
+        <a href="signup.html">Sign up</a>
+        <a href="login.html">Sign in</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="form-title">
+        <h2>Sign in</h2>
+      </div>
+      <form action="home.html">
+        <label for="email">Email address</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email address"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+
+        <div class="remember">
+          <input type="checkbox" id="remember" name="remember" />
+          <label for="remember">Remember me</label>
+        </div>
+
+        <div class="forgot">
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Sign in</button>
+      </form>
+
+      <div class="signup-link">
+        Not a member? <a href="signup.html">Sign up</a>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p>3rd floor, ABC complex, Trivandrum</p>
+      <p>info@eduhub.com</p>
+      <p>&copy; 2023 Aiswaria A. All rights reserved.</p>
+    </div>
+    <script src="emailValidation.js"></script>
+    <script src="onfocusout.js"></script>
+  </body>
+</html>

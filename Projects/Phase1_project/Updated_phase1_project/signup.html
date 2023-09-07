@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="./images/logo.png" />
+        <h4>EDUHUB</h4>
+      </div>
+      <div class="menu">
+        <a href="home.html">Home</a>
+        <a href="about.html">About us</a>
+        <a href="signup.html">Sign up</a>
+        <a href="login.html">Sign in</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="form-title">
+        <h2>Sign up</h2>
+      </div>
+      <form action="home.html" onsubmit="return validateForm()">
+        <label for="firstname">First name</label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          placeholder="First name"
+          required
+        /><br />
+        <span id="first-name-error" class="error-message"></span><br />
+        <label for="lastname">Last name</label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          placeholder="Last name"
+          required
+        /><br />
+        <span id="last-name-error" class="error-message"></span><br />
+        <label for="dob">Date of birth</label>
+        <input
+          type="date"
+          id="dob"
+          name="dob"
+          placeholder="Date of birth"
+          required
+        /><br />
+        <span id="dob-error" class="error-message"></span><br />
+        <label for="age">Age</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Age"
+          readonly
+        /><br />
+        <label>Gender</label>
+        <div class="radio">
+          <input type="radio" id="male" name="gender" value="male" required />
+          <label for="male">Male</label>
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="female"
+            required
+          />
+          <label for="female">Female</label>
+          <input type="radio" id="other" name="gender" value="other" required />
+          <label for="other">Other</label>
+        </div>
+        <br />
+        <label for="phone">Phone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Phone number"
+          required
+        /><br />
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email address"
+          required
+        /><br />
+        <label for="address">Address</label>
+        <textarea
+          id="address"
+          name="address"
+          placeholder="Address"
+          rows="3"
+          required
+        ></textarea
+        ><br />
+        <label for="state">State</label>
+        <select id="state" name="State" required>
+          <option value="" disabled selected>Select state</option>
+          <option value="AP">Andhra Prades</option>
+          <option value="KA">Karnataka</option>
+          <option value="KL">Kerala</option>
+          <option value="MH">Maharashtra</option>
+          <option value="TN">Tamil Nadu</option>
+          <option value="TS">Telangana</option></select
+        ><br />
+        <label for="city">City</label>
+        <select id="city" name="city" disabled>
+          <option value="none" selected disabled>
+            Select a state First
+          </option></select
+        ><br />
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+        /><br />
+        <span id="username-error" class="error-message"></span><br />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br />
+        <span id="password-error" class="error-message"></span><br />
+        <label for="confirm-password">Confirm password</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          placeholder="Confirm password"
+          required
+        /><br />
+        <span id="confirm-password-error" class="error-message"></span><br />
+        <script src="signupValidation.js"></script>
+        <input type="submit" class="signup-btn" value="Sign up" />
+      </form>
+    </div>
+    <div class="footer">
+      <div class="footer-social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p>3rd floor, ABC complex, Trivandrum</p>
+      <p>info@eduhub.com</p>
+      <p>&copy; 2023 Aiswaria A. All rights reserved.</p>
+    </div>
+    <script src="usernameValidation.js"></script>
+    <script src="onfocusout.js"></script>
+  </body>
+</html>
