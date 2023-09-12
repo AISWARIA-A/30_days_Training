@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdmissionManagementSystem.Models;
+using AdmissionManagementSystem.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +19,41 @@ namespace AdmissionManagementSystem.Controllers
         {
             return View();
         }
+
+        MessageRepository messageRepository = new MessageRepository();
+        StudentRepository studentRepository = new StudentRepository();
+
+        public ActionResult ContactUs()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception Obj_Exception)
+            {
+                return null;
+            }
+        }
+
+            [HttpPost]
+        public ActionResult ContactUs(Message message)
+        {
+            messageRepository.AddMessages(message);
+            return RedirectToAction("Home");
+        }
+
+        public ActionResult Student()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Student(Student student)
+        {
+            studentRepository.AddStudent(student);
+            return RedirectToAction("Home");
+        }
+
 
 
 

@@ -26,8 +26,14 @@
         <div class="menu">
             @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "navigation-text" })
             @Html.ActionLink("About Us", "AboutUs", "Home", new { area = "" }, new { @class = "navigation-text" })
-            <a href="login.html">Sign in</a>
-            <a href="contact.html">Contact us</a>
+            @Html.ActionLink("Contact Us", "ContactUs", "Home", new { area = "" }, new { @class = "navigation-text" })
+            <div class="subnav">
+                <a href="#" class="subnavbtn">Sign up <i class="fa fa-caret-down"></i></a>
+                <div class="subnav-content">
+                    <a href="#bring">Student</a>
+                    <a href="#deliver">Admin</a>
+                </div>
+            </div>
         </div>
     </div>
     <div>

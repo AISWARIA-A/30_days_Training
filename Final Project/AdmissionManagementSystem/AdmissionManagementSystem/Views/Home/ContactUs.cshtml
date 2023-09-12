@@ -1,0 +1,70 @@
+﻿@model AdmissionManagementSystem.Models.Message
+
+@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<html>
+<head>
+    <link href="~/Content/CSS/Contact.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <img src="~/Content/Images/cs.jpg" class="header-img" />
+        <div class="heading">
+            <h2>Contact us</h2>
+            <br />
+            <h4>
+                If you have any doubt regarding the courses we provide or for admission
+                assisstance feel free to reach out to us!!
+            </h4>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MessageText, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MessageText, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MessageText, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default"  style="background-image: linear-gradient(to right, #ff5733, #ff8c1a); color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;"/>
+                    </div>
+                </div>
+            </div>
+        }
+</body>
+</html>

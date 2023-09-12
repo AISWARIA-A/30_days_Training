@@ -1,0 +1,308 @@
+﻿@model AdmissionManagementSystem.Models.Student
+
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<html>
+<head>
+    <link href="~/Content/CSS/StudentSignup.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="form-title">
+            <h2>Sign up</h2>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", required = "required", pattern = "[A-Za-z]+" } })
+                        <span class="text-danger" id="firstNameError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", required = "required", pattern = "[A-Za-z]+" } })
+                        <span class="text-danger" id="lastNameError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            var minimumBirthdate = DateTime.Today.AddYears(-17);
+                        }
+                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", @max = minimumBirthdate.ToString("yyyy-MM-dd"), required = "required" } })
+                        <span class="text-danger" id="dateOfBirthError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Gender</label>
+                    <div class="col-md-10">
+                        <label class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Male") Male
+                        </label>
+                        <label class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Female") Female
+                        </label>
+                        <label class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Other") Other
+                        </label>
+                        <span class="text-danger" id="genderError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required", pattern = "[0-9]+" } })
+                        <span class="text-danger" id="phoneNumberError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control", required = "required", type = "email" } })
+                        <span class="text-danger" id="emailAddressError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        <span class="text-danger" id="addressError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="stateDropdown" class="form-control" required="required">
+                            <option value="">Select a State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                        <span class="text-danger" id="stateError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="cityDropdown" class="form-control" required="required">
+                            <option value="">Select a City</option>
+                        </select>
+                        <span class="text-danger" id="cityError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        <span class="text-danger" id="usernameError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "6" } })
+                        <span class="text-danger" id="passwordError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", required = "required", type = "password", id = "confirmPassword" } })
+                        <span class="text-danger" id="confirmPasswordError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 btn">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+        var indianStates = [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Kerala",
+            "Tamil Nadu",
+            "Karnataka",
+            "Maharashtra"
+        ];
+
+        var citiesByState = {
+            "Andhra Pradesh": ["Hyderabad", "Visakhapatnam"],
+            "Arunachal Pradesh": ["Itanagar"],
+            "Assam": ["Dispur"],
+            "Kerala": ["Thiruvananthapuram", "Kochi"],
+            "Tamil Nadu": ["Chennai", "Coimbatore"],
+            "Karnataka": ["Bangalore", "Mysore"],
+            "Maharashtra": ["Mumbai", "Pune"]
+        };
+
+        function populateStates() {
+            var stateDropdown = document.getElementById("stateDropdown");
+            for (var i = 0; i < indianStates.length; i++) {
+                var option = document.createElement("option");
+                option.text = indianStates[i];
+                option.value = indianStates[i];
+                stateDropdown.appendChild(option);
+            }
+        }
+
+        function populateCities(selectedState) {
+            var cityDropdown = document.getElementById("cityDropdown");
+            cityDropdown.innerHTML = '<option value="">Select a City</option>';
+            if (selectedState in citiesByState) {
+                var cities = citiesByState[selectedState];
+                for (var i = 0; i < cities.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = cities[i];
+                    option.value = cities[i];
+                    cityDropdown.appendChild(option);
+                }
+            }
+        }
+
+        populateStates();
+
+        document.getElementById("stateDropdown").addEventListener("change", function () {
+            var selectedState = this.value;
+            populateCities(selectedState);
+        });
+
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                // Validation for First Name
+                var firstName = $("#FirstName").val();
+                if (!/^[A-Za-z]+$/.test(firstName)) {
+                    $("#firstNameError").html("First Name should only contain letters.");
+                    event.preventDefault();
+                } else {
+                    $("#firstNameError").html("");
+                }
+
+                // Validation for Last Name
+                var lastName = $("#LastName").val();
+                if (!/^[A-Za-z]+$/.test(lastName)) {
+                    $("#lastNameError").html("Last Name should only contain letters.");
+                    event.preventDefault();
+                } else {
+                    $("#lastNameError").html("");
+                }
+
+                // Validation for Date of Birth
+                var dateOfBirth = $("#DateOfBirth").val();
+                var minimumBirthdate = new Date();
+                minimumBirthdate.setFullYear(minimumBirthdate.getFullYear() - 17);
+                if (new Date(dateOfBirth) > minimumBirthdate) {
+                    $("#dateOfBirthError").html("Age should be at least 17 years.");
+                    event.preventDefault();
+                } else {
+                    $("#dateOfBirthError").html("");
+                }
+
+                // Validation for Gender
+                var gender = $("input[name='Gender']:checked").val();
+                if (!gender) {
+                    $("#genderError").html("Please select a Gender.");
+                    event.preventDefault();
+                } else {
+                    $("#genderError").html("");
+                }
+
+                // Validation for Phone Number
+                var phoneNumber = $("#PhoneNumber").val();
+                if (!/^[0-9]+$/.test(phoneNumber)) {
+                    $("#phoneNumberError").html("Phone Number should only contain numbers.");
+                    event.preventDefault();
+                } else {
+                    $("#phoneNumberError").html("");
+                }
+
+
+                // Validation for Address
+                var address = $("#Address").val();
+                if (address.trim() === "") {
+                    $("#addressError").html("Address is required.");
+                    event.preventDefault();
+                } else {
+                    $("#addressError").html("");
+                }
+
+                // Validation for State
+                var state = $("#stateDropdown").val();
+                if (state === "") {
+                    $("#stateError").html("Please select a State.");
+                    event.preventDefault();
+                } else {
+                    $("#stateError").html("");
+                }
+
+                // Validation for City
+                var city = $("#cityDropdown").val();
+                if (city === "") {
+                    $("#cityError").html("Please select a City.");
+                    event.preventDefault();
+                } else {
+                    $("#cityError").html("");
+                }
+
+                // Validation for Username
+                var username = $("#Username").val();
+                if (username.trim() === "") {
+                    $("#usernameError").html("Username is required.");
+                    event.preventDefault();
+                } else {
+                    $("#usernameError").html("");
+                }
+
+                // Validation for Password
+                var password = $("#Password").val();
+                if (password.length < 6) {
+                    $("#passwordError").html("Password should be at least 6 characters.");
+                    event.preventDefault();
+                } else {
+                    $("#passwordError").html("");
+                }
+
+                // Validation for Confirm Password
+                var confirmPassword = $("#confirmPassword").val();
+                if (confirmPassword !== password) {
+                    $("#confirmPasswordError").html("The password and confirmation password do not match.");
+                    event.preventDefault();
+                } else {
+                    $("#confirmPasswordError").html("");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
