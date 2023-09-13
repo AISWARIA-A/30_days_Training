@@ -124,9 +124,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\MessageRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
   </ItemGroup>
@@ -166,6 +168,7 @@
     <Content Include="Content\Images\clg7.jpeg" />
     <Content Include="Content\Images\cs.jpg" />
     <Content Include="Content\Images\logo.jpeg" />
+    <Content Include="Content\JS\StudentSignin.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -208,6 +211,7 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\Student.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

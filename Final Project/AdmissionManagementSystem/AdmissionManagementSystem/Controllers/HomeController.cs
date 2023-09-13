@@ -10,6 +10,10 @@ namespace AdmissionManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        MessageRepository messageRepository = new MessageRepository();
+        StudentRepository studentRepository = new StudentRepository();
+        AdminRepository adminRepository = new AdminRepository();
+
         public ActionResult Home()
         {
             return View();
@@ -19,9 +23,6 @@ namespace AdmissionManagementSystem.Controllers
         {
             return View();
         }
-
-        MessageRepository messageRepository = new MessageRepository();
-        StudentRepository studentRepository = new StudentRepository();
 
         public ActionResult ContactUs()
         {
@@ -52,6 +53,19 @@ namespace AdmissionManagementSystem.Controllers
         {
             studentRepository.AddStudent(student);
             return RedirectToAction("Home");
+        }
+
+        public ActionResult Admin() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Admin(Admin admin)
+        {
+            adminRepository.AddAdmin(admin);
+            return RedirectToAction("Home");
+
         }
 
 

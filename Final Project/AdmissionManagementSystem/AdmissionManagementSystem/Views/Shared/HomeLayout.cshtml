@@ -30,8 +30,15 @@
             <div class="subnav">
                 <a href="#" class="subnavbtn">Sign up <i class="fa fa-caret-down"></i></a>
                 <div class="subnav-content">
-                    <a href="#bring">Student</a>
-                    <a href="#deliver">Admin</a>
+                    @Html.ActionLink("Student", "Student", "Home", new { area = "" }, new { @class = "navigation-text" })
+                    @Html.ActionLink("Admin", "Admin", "Home", new { area = "" }, new { @class = "navigation-text" })
+                </div>
+            </div>
+            <div class="subnav">
+                <a href="#" class="subnavbtn">Sign in <i class="fa fa-caret-down"></i></a>
+                <div class="subnav-content">
+                    @Html.ActionLink("Student", "Student", "Home", new { area = "" }, new { @class = "navigation-text" })
+                    @Html.ActionLink("Admin", "Admin", "Home", new { area = "" }, new { @class = "navigation-text" })
                 </div>
             </div>
         </div>
