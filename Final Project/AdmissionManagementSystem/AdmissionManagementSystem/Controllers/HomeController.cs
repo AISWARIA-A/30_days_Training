@@ -13,6 +13,7 @@ namespace AdmissionManagementSystem.Controllers
         MessageRepository messageRepository = new MessageRepository();
         StudentRepository studentRepository = new StudentRepository();
         AdminRepository adminRepository = new AdminRepository();
+        LoginRepository loginRepository = new LoginRepository();
 
         public ActionResult Home()
         {
@@ -36,7 +37,7 @@ namespace AdmissionManagementSystem.Controllers
             }
         }
 
-            [HttpPost]
+        [HttpPost]
         public ActionResult ContactUs(Message message)
         {
             messageRepository.AddMessages(message);
@@ -67,6 +68,40 @@ namespace AdmissionManagementSystem.Controllers
             return RedirectToAction("Home");
 
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Login login)
+        {
+            if (ModelState.IsValid)
+            {
+                int adminId = loginRepository.AuthenticateAdmin(login);
+
+                if (adminId > 0)
+                {
+                    Session["AdminID"] = adminId;
+                    return RedirectToAction("Home");
+                }
+
+                int studentId = loginRepository.AuthenticateStudent(login);
+
+                if (studentId > 0)
+                {
+                    Session["StudentID"] = studentId;
+                    return RedirectToAction("Home");
+                }
+
+                ViewBag.ErrorMessage = "Invalid username or password";
+            }
+
+            
+            return View("Login");
+        }
+
 
 
 
