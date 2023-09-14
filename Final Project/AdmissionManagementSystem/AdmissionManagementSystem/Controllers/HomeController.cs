@@ -14,17 +14,26 @@ namespace AdmissionManagementSystem.Controllers
         StudentRepository studentRepository = new StudentRepository();
         AdminRepository adminRepository = new AdminRepository();
         LoginRepository loginRepository = new LoginRepository();
-
+        /// <summary>
+        /// Home page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Home()
         {
             return View();
         }
-
+        /// <summary>
+        /// About us page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AboutUs()
         {
             return View();
         }
-
+        /// <summary>
+        /// Contact us page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ContactUs()
         {
             try
@@ -41,9 +50,12 @@ namespace AdmissionManagementSystem.Controllers
         public ActionResult ContactUs(Message message)
         {
             messageRepository.AddMessages(message);
-            return RedirectToAction("Home");
+            return RedirectToAction("ContactUs");
         }
-
+        /// <summary>
+        /// Registraion page for students
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Student()
         {
             return View();
@@ -53,9 +65,12 @@ namespace AdmissionManagementSystem.Controllers
         public ActionResult Student(Student student)
         {
             studentRepository.AddStudent(student);
-            return RedirectToAction("Home");
+            return RedirectToAction("Login");
         }
-
+        /// <summary>
+        /// Registration page for admin
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Admin() 
         {
             return View();
@@ -65,10 +80,13 @@ namespace AdmissionManagementSystem.Controllers
         public ActionResult Admin(Admin admin)
         {
             adminRepository.AddAdmin(admin);
-            return RedirectToAction("Home");
+            return RedirectToAction("Login");
 
         }
-
+        /// <summary>
+        /// Login page for admin and student
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Login()
         {
             return View();
@@ -84,6 +102,7 @@ namespace AdmissionManagementSystem.Controllers
                 if (adminId > 0)
                 {
                     Session["AdminID"] = adminId;
+                    Session["Username"] = login.Username.ToString();
                     return RedirectToAction("Home");
                 }
 
@@ -92,6 +111,7 @@ namespace AdmissionManagementSystem.Controllers
                 if (studentId > 0)
                 {
                     Session["StudentID"] = studentId;
+                    Session["Username"] = login.Username.ToString();
                     return RedirectToAction("Home");
                 }
 
