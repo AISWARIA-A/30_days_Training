@@ -103,7 +103,7 @@ namespace AdmissionManagementSystem.Controllers
                 {
                     Session["AdminID"] = adminId;
                     Session["Username"] = login.Username.ToString();
-                    return RedirectToAction("Home");
+                    return RedirectToAction("AdminHome", "Admin");
                 }
 
                 int studentId = loginRepository.AuthenticateStudent(login);

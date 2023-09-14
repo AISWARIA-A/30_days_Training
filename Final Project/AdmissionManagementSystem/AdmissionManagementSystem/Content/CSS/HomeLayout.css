@@ -8,7 +8,7 @@
 }
 
 .navbar {
-    background: linear-gradient(to left, #fca650, #faffd1);
+    background-image: linear-gradient(to left, #337ab7, #05a3f1);
     color: #fff;
     padding: 10px;
     position: fixed;
@@ -30,7 +30,7 @@
 }
 
     .logo h4 {
-        color: #eb7617;
+        color: #f7f3f0;
         margin-left: 2px;
     }
 
@@ -40,13 +40,13 @@
     }
 
 .menu a {
-    color: #333333;
+    color: #fff;
     text-decoration: none;
     margin-right: 40px;
 }
 
     .menu a:hover {
-        color: #eb7617;
+        color: #05a3f1;
     }
 
 
@@ -94,19 +94,19 @@
     display: none;
     position: absolute;
     right: 0;
-    background-color: navajowhite;
+    background-color: ghostwhite;
     width: 25%;
     z-index: 1;
 }
 
     .subnav-content a {
         float: right;
-        color: #333333;
+        color: #8eabfb;
         text-decoration: none;
     }
 
         .subnav-content a:hover {
-            background-color: #eee;
+            background-color: #fff;
             color: black;
         }
 

@@ -1,6 +1,7 @@
 ﻿body {
     font-family: Arial, sans-serif;
-    background-image: linear-gradient(to right, #fca650, #fff);
+    background-image: url('../images/ab1.jpg');
+    background-size: cover;
     margin: 0%;
 }
 .container {
@@ -19,7 +20,7 @@
 }
 
 .form-title {
-    background-image: linear-gradient(to right, #ff5733, #ff8c1a);
+    background-image: linear-gradient(to left, #337ab7, #05a3f1);
     color: #fff;
     padding: 10px 20px;
     border-radius: 4px;
@@ -28,7 +29,7 @@
 }
 
 .btn {
-    background-image: linear-gradient(to right, #ff5733, #ff8c1a);
+    background-image: linear-gradient(to left, #337ab7, #05a3f1);
     color: #fff;
-    border:none;
+    border: none;
 }

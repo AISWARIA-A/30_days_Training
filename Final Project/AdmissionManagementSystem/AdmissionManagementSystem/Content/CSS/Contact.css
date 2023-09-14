@@ -14,8 +14,8 @@
 }
 
 .btn btn-defaul {
-    background-image: linear-gradient(to right, #ff5733, #ff8c1a);
-    color: #fff;
+    background-image: linear-gradient(to left, #337ab7, #05a3f1);
+    color: yellow;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
