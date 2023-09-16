@@ -16,6 +16,8 @@ namespace AdmissionManagementSystem.Controllers
     {
         StudentRepository studentRepository = new StudentRepository();
         MessageRepository messageRepository = new MessageRepository();
+        CourseRepository courseRepository = new CourseRepository();
+        AdminRepository adminRepository = new AdminRepository();
         /// <summary>
         /// Admin home page
         /// </summary>
@@ -103,6 +105,94 @@ namespace AdmissionManagementSystem.Controllers
                 ModelState.AddModelError("", "An error occured while deleting the item");
                 return View("DeleteMessage", id);
             }
+        }
+        /// <summary>
+        /// To get the list of courses open for registraion
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Courses()
+        {
+            ModelState.Clear();
+            return View(courseRepository.GetAllCourses());
+        }
+        /// <summary>
+        /// Create course page
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateCourse()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateCourse(Course course)
+        {
+            courseRepository.AddCourses(course);
+            return RedirectToAction("Courses");
+        }
+        /// <summary>
+        /// To edit a course 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditCourse(int id)
+        {
+            return View(courseRepository.GetAllCourses().Find(course => course.CourseID == id));
+        }
+
+        [HttpPost]
+        public ActionResult EditCourse(Course course)
+        {
+            try
+            {
+                courseRepository.EditCourse(course);
+                return RedirectToAction("Courses");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        /// <summary>
+        /// Delete Course page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DeleteCourse(int id) 
+        {
+            var courseItem = courseRepository.GetCourseById(id);
+            return View(courseItem); 
+        }
+        [HttpPost]
+        public ActionResult CourseDeleteConfirm(int id) 
+        {
+            try 
+            {
+                courseRepository.DeleteCourseById(id);
+                return RedirectToAction("Courses"); 
+            }
+            catch (Exception ex) 
+            {
+                ModelState.AddModelError("", "An error occured while deleting the item");
+                return View("DeleteCourse", id); 
+            }
+        }
+        /// <summary>
+        /// Add new admin page
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAdmin(Admin admin)
+        {
+            adminRepository.AddAdmin(admin);
+            return RedirectToAction("AddAdmin");
+
         }
     }
 }

@@ -68,22 +68,6 @@ namespace AdmissionManagementSystem.Controllers
             return RedirectToAction("Login");
         }
         /// <summary>
-        /// Registration page for admin
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Admin() 
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Admin(Admin admin)
-        {
-            adminRepository.AddAdmin(admin);
-            return RedirectToAction("Login");
-
-        }
-        /// <summary>
         /// Login page for admin and student
         /// </summary>
         /// <returns></returns>
@@ -112,7 +96,7 @@ namespace AdmissionManagementSystem.Controllers
                 {
                     Session["StudentID"] = studentId;
                     Session["Username"] = login.Username.ToString();
-                    return RedirectToAction("Home");
+                    return RedirectToAction("Home", "Student");
                 }
 
                 ViewBag.ErrorMessage = "Invalid username or password";

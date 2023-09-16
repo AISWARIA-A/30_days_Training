@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AdmissionManagementSystem.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<html>
+<head><title>Create course</title></head>
+<body>
+    <h2>Courses</h2>
+
+<p>
+    @Html.ActionLink("Create course", "CreateCourse")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormOpenDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormCloseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormOpenDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormCloseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseCapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCourse", new { id=item.CourseID }) |
+            @Html.ActionLink("Delete", "DeleteCourse", new { id=item.CourseID })
+        </td>
+    </tr>
+}
+
+</table>
+</body>
+</html>

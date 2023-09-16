@@ -70,7 +70,11 @@ namespace AdmissionManagementSystem.Repository
                 });
             return messageList;
         }
-
+        /// <summary>
+        /// To get message by id
+        /// </summary>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
         public Message GetMessageById(int messageId)
         {
             Message message = null;
