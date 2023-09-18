@@ -145,5 +145,25 @@ namespace AdmissionManagementSystem.Repository
             connection.Close();
         }
 
+        public bool ApplyCourse(int courseId, int studentId)
+        {
+            Connection();
+
+            using (SqlCommand command = new SqlCommand("SPI_ApplyCourse", connection))
+            {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@StudentID", studentId);
+                    command.Parameters.AddWithValue("@CourseID", courseId);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                    return true;
+            }
+
+        }
+
+
     }
 }

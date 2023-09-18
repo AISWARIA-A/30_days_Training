@@ -77,3 +77,6 @@ C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSy
 C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\obj\Debug\AdmissionManagementSystem.csproj.CopyComplete
 C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\obj\Debug\AdmissionManagementSystem.dll
 C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\obj\Debug\AdmissionManagementSystem.pdb
+C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\bin\ExpressionEvaluator.dll
+C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\bin\GSF.Core.dll
+C:\Users\Aiswaria A\Desktop\30_days_Training\Final Project\AdmissionManagementSystem\AdmissionManagementSystem\bin\GSF.Core.xml

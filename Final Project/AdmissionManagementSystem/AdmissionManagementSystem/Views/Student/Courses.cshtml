@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AdmissionManagementSystem.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+
+<html>
+<head>
+    <title>Opened courses</title>
+</head>
+<body>
+    <h2>Courses open for application</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseStatus)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormOpenDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormCloseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseStatus)
+                </td>
+                <td>
+
+                    @using (Html.BeginForm("ApplyForCourse", "Student", new { id = item.CourseID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Apply now" class="btn btn-default" /> |
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</body>
+</html>

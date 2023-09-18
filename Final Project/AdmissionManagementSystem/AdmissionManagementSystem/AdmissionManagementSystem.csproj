@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExpressionEvaluator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=90d9f15d622e2348, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressionEvaluator.2.0.4.0\lib\net40\ExpressionEvaluator.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Core, Version=2.4.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Core.2.4.28\lib\net46\GSF.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -131,6 +137,7 @@
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentCourseApplications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
@@ -2090,6 +2097,8 @@
     <Content Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\Shared\StudentLayout.cshtml" />
     <Content Include="Views\Student\Home.cshtml" />
+    <Content Include="Views\Student\ProfileDetails.cshtml" />
+    <Content Include="Views\Student\Courses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
