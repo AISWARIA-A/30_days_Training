@@ -58,6 +58,24 @@ namespace AdmissionManagementSystem.Controllers
                 return RedirectToAction("Courses");
             }
         }
-
+        /// <summary>
+        /// Applied courses and their status view
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AppliedCourses()
+        {
+            int studentId = (int)Session["StudentID"];
+            List<AppliedCourse> appliedCourses = studentRepository.GetAppliedCoursesByStudentId(studentId);
+            return View(appliedCourses);
+        }
+        /// <summary>
+        /// logout
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Home", "Home");
+        }
     }
 }

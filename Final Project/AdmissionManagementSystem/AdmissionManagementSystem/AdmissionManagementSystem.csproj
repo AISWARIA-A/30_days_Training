@@ -133,6 +133,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AppliedCourse.cs" />
+    <Compile Include="Models\AppliedStudent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Message.cs" />
@@ -2099,6 +2101,10 @@
     <Content Include="Views\Student\Home.cshtml" />
     <Content Include="Views\Student\ProfileDetails.cshtml" />
     <Content Include="Views\Student\Courses.cshtml" />
+    <Content Include="Views\Student\AppliedCourses.cshtml" />
+    <Content Include="Views\Admin\AppliedCourses.cshtml" />
+    <Content Include="Views\Admin\AppliedStudents.cshtml" />
+    <Content Include="Views\Admin\AppliedStudentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

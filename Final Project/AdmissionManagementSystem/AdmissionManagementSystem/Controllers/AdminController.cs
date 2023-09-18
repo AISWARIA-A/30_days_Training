@@ -194,5 +194,43 @@ namespace AdmissionManagementSystem.Controllers
             return RedirectToAction("AddAdmin");
 
         }
+        /// <summary>
+        /// Courses page with navigation to applied students
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AppliedCourses()
+        {
+            ModelState.Clear();
+            return View(courseRepository.GetAllCourses());
+        }
+        /// <summary>
+        /// Students applied in a course
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AppliedStudents(int id)
+        {
+            List<AppliedStudent> appliedStudents = courseRepository.GetAppliedStudentsByCourseID(id);
+            return View(appliedStudents);
+        }
+        /// <summary>
+        /// View details of applied student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult AppliedStudentDetails(int id)
+        {
+            Student student = studentRepository.GetStudentById(id);
+            return View(student);
+        }
+        /// <summary>
+        /// logout
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Home", "Home");
+        }
+
     }
 }

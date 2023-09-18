@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AdmissionManagementSystem.Models.Course>
+
+@{
+    ViewBag.Title = "AppliedCourses";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<head><title>All courses</title></head>
+<h2>All courses</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormOpenDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormCloseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormOpenDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormCloseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseCapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseStatus)
+        </td>
+        <td>
+            @Html.ActionLink("View applied students", "AppliedStudents", new { id=item.CourseID }) 
+        </td>
+    </tr>
+}
+
+</table>

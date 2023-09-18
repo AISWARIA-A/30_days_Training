@@ -81,16 +81,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-table text-gray-400"></i>
                     <span>Courses</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"></h6>
+                        <h6 class="collapse-header">Course components</h6>
                         <a class="collapse-item" href="@Url.Action("Courses", "Student")">Courses</a>
-                        <a class="collapse-item" href="utilities-border.html">Applied courses</a>
-                        <a class="collapse-item" href="utilities-animation.html">Application status</a>
+                        <a class="collapse-item" href="@Url.Action("AppliedCourses", "Student")">Applied courses and status</a>
                     </div>
                 </div>
             </li>
@@ -135,7 +134,7 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-wrench"></i>
                     <span>Tables</span>
                 </a>
             </li>
@@ -179,10 +178,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -203,7 +198,7 @@
                 </div>
                 <!-- End of Main Content -->
                 <!-- Footer -->
-                <footer class="sticky-footer bg-white">
+                <footer class="sticky-footer bg-white" >
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>&copy;ABC College of Engineering Trivandrum 2023. All rights reserved.</span>
@@ -236,7 +231,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="@Url.Action("Logout", "Student")">Logout</a>
                     </div>
                 </div>
             </div>

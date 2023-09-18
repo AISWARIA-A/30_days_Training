@@ -156,5 +156,45 @@ namespace AdmissionManagementSystem.Repository
 
             connection.Close();
         }
+        /// <summary>
+        /// To view list of students applied for each course
+        /// </summary>
+        /// <param name="courseID"></param>
+        /// <returns></returns>
+        public List<AppliedStudent> GetAppliedStudentsByCourseID(int courseID)
+        {
+            List<AppliedStudent> appliedStudents = new List<AppliedStudent>();
+
+            Connection();
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SPS_AppliedStudents", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@CourseID", courseID);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AppliedStudent student = new AppliedStudent
+                            {
+                                ApplicationID = (int)reader["ApplicationID"],
+                                StudentName = reader["StudentName"].ToString(),
+                                ApplicationDate = (DateTime)reader["ApplicationDate"],
+                                StudentID = (int)reader["StudentID"]
+                            };
+
+                            appliedStudents.Add(student);
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return appliedStudents;
+        }
     }
 }

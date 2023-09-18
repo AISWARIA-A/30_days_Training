@@ -144,7 +144,12 @@ namespace AdmissionManagementSystem.Repository
 
             connection.Close();
         }
-
+        /// <summary>
+        /// To apply a course
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
         public bool ApplyCourse(int courseId, int studentId)
         {
             Connection();
@@ -163,6 +168,46 @@ namespace AdmissionManagementSystem.Repository
             }
 
         }
+        /// <summary>
+        /// To list courses applied and their status
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        public List<AppliedCourse> GetAppliedCoursesByStudentId(int studentId)
+        {
+            List<AppliedCourse> appliedCourses = new List<AppliedCourse>();
+
+            Connection();
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SPS_AppliedCourses", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@StudentID", studentId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AppliedCourse appliedCourse = new AppliedCourse
+                            {
+                                ApplicationID = Convert.ToInt32(reader["ApplicationID"]),
+                                CourseName = reader["CourseName"].ToString(),
+                                ApplicationDate = Convert.ToDateTime(reader["ApplicationDate"]),
+                                Status = reader["Status"].ToString()
+                            };
+
+                            appliedCourses.Add(appliedCourse);
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+
+            return appliedCourses;
+        }
+
 
 
     }

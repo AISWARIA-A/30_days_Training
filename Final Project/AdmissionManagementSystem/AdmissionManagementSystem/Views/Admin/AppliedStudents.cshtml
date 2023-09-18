@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AdmissionManagementSystem.Models.AppliedStudent>
+
+@{
+    ViewBag.Title = "AppliedStudents";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<head><title>Applied students</title></head>
+<h2>Applied students</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationDate)
+        </td>
+        <td>
+            @Html.ActionLink("View student details", "AppliedStudentDetails", new { id=item.StudentID }) 
+        </td>
+    </tr>
+}
+
+</table>
