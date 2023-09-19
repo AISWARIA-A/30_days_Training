@@ -12,6 +12,7 @@ namespace AdmissionManagementSystem.Controllers
     {
         StudentRepository studentRepository = new StudentRepository();
         CourseRepository courseRepository = new CourseRepository();
+        EducationRepository educationRepository = new EducationRepository();    
         /// <summary>
         /// Student home page
         /// </summary>
@@ -69,6 +70,23 @@ namespace AdmissionManagementSystem.Controllers
             return View(appliedCourses);
         }
         /// <summary>
+        /// Insert education details
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertEducation()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult InsertaEducation(EducationDetails education, HttpPostedFileBase image1, HttpPostedFileBase image2, HttpPostedFileBase image3)
+        {
+            educationRepository.Insert(education, image1, image2, image3);
+            return RedirectToAction("EducationDetails");
+        }
+
+
+
+        /// <summary>
         /// logout
         /// </summary>
         /// <returns></returns>
@@ -76,6 +94,17 @@ namespace AdmissionManagementSystem.Controllers
         {
             Session.Abandon();
             return RedirectToAction("Home", "Home");
+        }
+        private bool IsImage(HttpPostedFileBase Photo)
+        {
+            if (Photo != null && Photo.ContentLength > 0)
+            {
+                string[] allowedImageTypes = { "image/jpeg", "image/png", "image/gif" };
+                string contentType = Photo.ContentType;
+
+                return allowedImageTypes.Contains(contentType);
+            }
+            return false;
         }
     }
 }

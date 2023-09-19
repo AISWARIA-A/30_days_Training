@@ -183,6 +183,7 @@ namespace AdmissionManagementSystem.Repository
                                 ApplicationID = (int)reader["ApplicationID"],
                                 StudentName = reader["StudentName"].ToString(),
                                 ApplicationDate = (DateTime)reader["ApplicationDate"],
+                                Status = reader["Status"].ToString(),
                                 StudentID = (int)reader["StudentID"]
                             };
 
@@ -196,5 +197,48 @@ namespace AdmissionManagementSystem.Repository
 
             return appliedStudents;
         }
+        /// <summary>
+        /// To reject an application
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        public bool RejectStudent(int applicationId)
+        {
+            Connection();
+
+            using (SqlCommand command = new SqlCommand("SPU_RejectStudent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ApplicationID", applicationId);
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                connection.Close();
+
+                return rowsAffected > 0;
+            }
+        }
+        /// <summary>
+        /// To accept an application
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        public bool AcceptStudent(int applicationId)
+        {
+            Connection();
+
+            using (SqlCommand command = new SqlCommand("SPU_AcceptStudent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ApplicationID", applicationId);
+
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+
+                return result > 0;
+            }
+        }
+
     }
 }

@@ -18,6 +18,8 @@ namespace AdmissionManagementSystem.Models
         [DisplayName("Application date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime ApplicationDate { get; set; }
+        [DisplayName("Application Status")]
+        public string Status { get; set; }
 
         [DisplayName("Student ID")]
         public int StudentID { get; set; }

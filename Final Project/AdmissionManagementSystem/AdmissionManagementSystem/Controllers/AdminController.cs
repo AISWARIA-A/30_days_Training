@@ -223,6 +223,50 @@ namespace AdmissionManagementSystem.Controllers
             return View(student);
         }
         /// <summary>
+        /// reject an application
+        /// </summary>
+        /// <returns></returns>
+
+        [HttpPost]
+        public ActionResult RejectStudent(int applicationId)
+        {
+            bool rejectionResult = courseRepository.RejectStudent(applicationId);
+
+            if (rejectionResult)
+            {
+                TempData["AlertClass"] = "alert-success";
+                TempData["AlertMessage"] = "Student application rejected successfully!";
+            }
+            else
+            {
+                TempData["AlertClass"] = "alert-danger";
+                TempData["AlertMessage"] = "Failed to reject student application. Please try again.";
+            }
+            return RedirectToAction("AppliedCourses", "Admin");
+        }
+        /// <summary>
+        /// accept an application
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AcceptStudent(int applicationId)
+        {
+            bool acceptanceResult = courseRepository.AcceptStudent(applicationId);
+
+            if (acceptanceResult)
+            {
+                TempData["SuccessMessage"] = "Student application accepted successfully!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to accept student application. Please try again.";
+            }
+
+            return RedirectToAction("AppliedCourses", "Admin");
+        }
+
+        /// <summary>
         /// logout
         /// </summary>
         /// <returns></returns>
