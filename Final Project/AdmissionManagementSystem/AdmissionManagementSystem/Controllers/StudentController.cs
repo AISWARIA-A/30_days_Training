@@ -78,12 +78,21 @@ namespace AdmissionManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult InsertaEducation(EducationDetails education, HttpPostedFileBase image1, HttpPostedFileBase image2, HttpPostedFileBase image3)
+        public ActionResult InsertEducation(EducationDetails education, HttpPostedFileBase image1, HttpPostedFileBase image2, HttpPostedFileBase image3)
         {
-            educationRepository.Insert(education, image1, image2, image3);
+            int studentId = (int)Session["StudentID"];
+            educationRepository.Insert(education, image1, image2, image3, studentId);
             return RedirectToAction("EducationDetails");
         }
-
+        /// <summary>
+        /// View education details
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EducationDetails()
+        {
+            int studentId = (int)Session["StudentID"];
+            return View(educationRepository.GetEducationDetails(studentId));
+        }
 
 
         /// <summary>

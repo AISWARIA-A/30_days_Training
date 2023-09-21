@@ -136,6 +136,7 @@
     <Compile Include="Models\AppliedCourse.cs" />
     <Compile Include="Models\AppliedStudent.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\EducationDetails.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Student.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
+    <Compile Include="Repository\EducationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\MessageRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
@@ -2105,6 +2107,9 @@
     <Content Include="Views\Admin\AppliedCourses.cshtml" />
     <Content Include="Views\Admin\AppliedStudents.cshtml" />
     <Content Include="Views\Admin\AppliedStudentDetails.cshtml" />
+    <Content Include="Views\Student\EducationDetails.cshtml" />
+    <Content Include="Views\Student\InsertEducation.cshtml" />
+    <Content Include="Views\Admin\EducationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

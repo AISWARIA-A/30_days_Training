@@ -27,7 +27,7 @@ namespace AdmissionManagementSystem.Repository
         /// <param name="plustwo"></param>
         /// <param name="degree"></param>
         /// <returns></returns>
-        public bool Insert(EducationDetails education, HttpPostedFileBase tenth, HttpPostedFileBase plustwo, HttpPostedFileBase degree)
+        public bool Insert(EducationDetails education, HttpPostedFileBase tenth, HttpPostedFileBase plustwo, HttpPostedFileBase degree, int studentId)
         {
             Connection();
             using (SqlCommand command = new SqlCommand("SPI_InsertEducation", connection))
@@ -46,6 +46,7 @@ namespace AdmissionManagementSystem.Repository
                 command.Parameters.AddWithValue("@DegreeStream", education.DegreeStream);
                 byte[] PhotoBytes3 = ConvertToBytes(degree);
                 command.Parameters.AddWithValue("@DegreeCertificate", PhotoBytes3);
+                command.Parameters.AddWithValue("StudentID", studentId);
                 connection.Open();
                 int i = command.ExecuteNonQuery();
                 connection.Close();
@@ -77,46 +78,11 @@ namespace AdmissionManagementSystem.Repository
             }
             return null;
         }
-
-        public List<EducationDetails> GetEducationDetails()
-        {
-            Connection();
-            List<EducationDetails> List = new List<EducationDetails>();
-            SqlCommand command = connection.CreateCommand();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "SPS_EducationDetails";
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataTable dtable = new DataTable();
-
-            connection.Open();
-            adapter.Fill(dtable);
-            connection.Close();
-
-            foreach (DataRow row in dtable.Rows)
-            {
-                studentsList.Add(new EducationDetails
-                {
-                    StudentID = Convert.ToInt32(row["StudentID"]),
-                    EducationID = Convert.ToInt32(row["EducationID"]),
-                    TenthSchool = row["TenthSchool"].ToString(),
-                    TenthCGPA = Convert.ToDecimal(row["TenthCGPA"]),
-                    TenthCertificate = row["TenthCertificate"] as byte[],
-                    PlusTwoSchool = row["PlusTwoSchool"].ToString(),
-                    PlusTwoCGPA = Convert.ToDecimal(row["PlusTwoCGPA"]),
-                    PlusTwoCertificate = row["PlusTwoCertificate"] as byte[],
-                    DegreeCollege = row["DegreeCollege"].ToString(),
-                    DegreeStream = row["DegreeStream"].ToString(),
-                    DegreeCGPA = Convert.ToDecimal(row["DegreeCGPA"]),
-                    DegreeCertificate = row["DegreeCertificate"] as byte[]
-
-                });
-            }
-
-            return studentsList;
-        }
-
-
-
+        /// <summary>
+        /// To get education details of a student
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
         public EducationDetails GetEducationDetails(int studentId)
         {
             EducationDetails educationDetails = null;

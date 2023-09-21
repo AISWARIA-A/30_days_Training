@@ -18,6 +18,7 @@ namespace AdmissionManagementSystem.Controllers
         MessageRepository messageRepository = new MessageRepository();
         CourseRepository courseRepository = new CourseRepository();
         AdminRepository adminRepository = new AdminRepository();
+        EducationRepository educationRepository = new EducationRepository();
         /// <summary>
         /// Admin home page
         /// </summary>
@@ -270,6 +271,11 @@ namespace AdmissionManagementSystem.Controllers
         /// logout
         /// </summary>
         /// <returns></returns>
+
+        public ActionResult EducationDetails(int studentId)
+        {
+            return View(educationRepository.GetEducationDetails(studentId));
+        }
         public ActionResult Logout()
         {
             Session.Abandon();

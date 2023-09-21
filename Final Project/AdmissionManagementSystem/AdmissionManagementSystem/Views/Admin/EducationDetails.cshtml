@@ -1,0 +1,109 @@
+﻿@model AdmissionManagementSystem.Models.EducationDetails
+
+@{
+    ViewBag.Title = "EducationDetails";
+    Layout = "~/Views/Shared/StudentLayout.cshtml";
+}
+<head><title>Education details</title></head>
+
+<div>
+    <h4>Education details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenthSchool)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenthSchool)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenthCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenthCGPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.TenthCertificate)
+        </dt>
+
+        <dd>
+            @{ if (Model.TenthCertificate != null)
+                {
+                    string base64string = Convert.ToBase64String(Model.TenthCertificate);
+                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlusTwoSchool)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlusTwoSchool)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlusTwoCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlusTwoCGPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.PlusTwoCertificate)
+        </dt>
+
+        <dd>
+            @{ if (Model.PlusTwoCertificate != null)
+                {
+                    string base64string = Convert.ToBase64String(Model.PlusTwoCertificate);
+                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegreeCollege)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DegreeCollege)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegreeCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DegreeCGPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegreeStream)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DegreeStream)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.DegreeCertificate)
+        </dt>
+
+        <dd>
+            @{ if (Model.DegreeCertificate != null)
+                {
+                    string base64string = Convert.ToBase64String(Model.DegreeCertificate);
+                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
+                }
+            }
+        </dd>
+        @Html.ActionLink("View student details", "AppliedStudentDetails", new { id = Model.StudentID })
+    </dl>
+</div>
