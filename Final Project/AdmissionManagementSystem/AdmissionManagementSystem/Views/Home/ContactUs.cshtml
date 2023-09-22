@@ -9,6 +9,7 @@
 <head>
     <link href="~/Content/CSS/Contact.css" rel="stylesheet" />
     <title>Contact us</title>
+    <link href="~/Content/CSS/StudentSignup.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -39,8 +40,9 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @id = "email", @onfocusout = "Checkemail()" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        <small></small>
                     </div>
                 </div>
 
@@ -62,10 +64,11 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default"  style="background-image: linear-gradient(to left, #337ab7, #05a3f1); color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;"/>
+                        <input type="submit" value="Create" class="btn btn-default" style="background-image: linear-gradient(to left, #337ab7, #05a3f1); color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" />
                     </div>
                 </div>
             </div>
         }
+        <script src="~/Content/JS/StudentSignin.js"></script>
 </body>
 </html>

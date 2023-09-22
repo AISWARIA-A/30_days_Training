@@ -30,15 +30,6 @@
             @Html.DisplayFor(model => model.TenthCertificate)
         </dt>
 
-        <dd>
-            @{ if (Model.TenthCertificate != null)
-                {
-                    string base64string = Convert.ToBase64String(Model.TenthCertificate);
-                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
-                }
-            }
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.PlusTwoSchool)
         </dt>
@@ -58,15 +49,6 @@
         <dt>
             @Html.DisplayFor(model => model.PlusTwoCertificate)
         </dt>
-
-        <dd>
-            @{ if (Model.PlusTwoCertificate != null)
-                {
-                    string base64string = Convert.ToBase64String(Model.PlusTwoCertificate);
-                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
-                }
-            }
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.DegreeCollege)
@@ -95,15 +77,6 @@
         <dt>
             @Html.DisplayFor(model => model.DegreeCertificate)
         </dt>
-
-        <dd>
-            @{ if (Model.DegreeCertificate != null)
-                {
-                    string base64string = Convert.ToBase64String(Model.DegreeCertificate);
-                    <img src="data:image;base64,@base64string" alt="Certificate" class="certificate-image" width="50" height="50" />
-                }
-            }
-        </dd>
 
     </dl>
 </div>
