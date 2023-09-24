@@ -1,4 +1,5 @@
 ﻿using AdmissionManagementSystem.Models;
+using GSF.ErrorManagement;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -145,6 +146,46 @@ namespace AdmissionManagementSystem.Repository
             connection.Close();
         }
         /// <summary>
+        /// To edit profile details
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
+        public bool UpdateUser(Student student)
+        {
+            int Read;
+            try
+            {
+                Connection();
+                SqlCommand command = new SqlCommand("SPU_UpdateStudent", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@FirstName", student.FirstName);
+                command.Parameters.AddWithValue("@LastName", student.LastName);
+                command.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth);
+                command.Parameters.AddWithValue("@Gender", student.Gender);
+                command.Parameters.AddWithValue("@PhoneNumber", student.PhoneNumber);
+                command.Parameters.AddWithValue("@EmailAddress", student.EmailAddress);
+                command.Parameters.AddWithValue("@Address", student.Address);
+                command.Parameters.AddWithValue("@City", student.City);
+                command.Parameters.AddWithValue("@State", student.State);
+                command.Parameters.AddWithValue("@StudentID", student.StudentID);
+                connection.Open();
+                Read = command.ExecuteNonQuery();
+                if (Read > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception Obj_Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// To apply a course
         /// </summary>
         /// <param name="courseId"></param>
@@ -206,6 +247,42 @@ namespace AdmissionManagementSystem.Repository
             }
 
             return appliedCourses;
+        }
+        /// <summary>
+        /// To change password
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public bool ChangePassword(int studentId, string oldPassword, string newPassword)
+        {
+            try
+            {
+                Connection();
+                SqlCommand command = new SqlCommand("SPU_ChangePassword", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@StudentID", studentId);
+                command.Parameters.AddWithValue("@OldPassword", oldPassword);
+                command.Parameters.AddWithValue("@NewPassword", newPassword);
+                SqlParameter resultParameter = new SqlParameter("@Result", SqlDbType.Int);
+                resultParameter.Direction = ParameterDirection.Output;
+                command.Parameters.Add(resultParameter);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+                int result = Convert.ToInt32(resultParameter.Value);
+                return result == 1;
+            }
+            catch (Exception Obj_Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
 

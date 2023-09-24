@@ -1,5 +1,6 @@
 ﻿using AdmissionManagementSystem.Models;
 using AdmissionManagementSystem.Repository;
+using GSF.ErrorManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,10 @@ namespace AdmissionManagementSystem.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// To get profile details
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ProfileDetails()
         {
             int Id = (int)Session["StudentID"];
@@ -29,10 +33,61 @@ namespace AdmissionManagementSystem.Controllers
             return View(student);
         }
         /// <summary>
-        /// Courses open for registration
+        /// To update profile details
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Courses()
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                int studentId = (int)Session["StudentID"];
+                var student = studentRepository.GetStudentById(studentId);
+                return View(student);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while loading student data.";
+                return RedirectToAction("ProfileDetails");
+            }
+        }
+
+        // POST: Student/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Student student)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool updateResult = studentRepository.UpdateUser(student);
+
+                    if (updateResult)
+                    {
+                        TempData["SuccessMessage"] = "Student information updated successfully!";
+                        return RedirectToAction("ProfileDetails");
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to update student information. Please try again.";
+                    }
+                }
+                return View(student); 
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while updating student information.";
+                return View(student); 
+            }
+        }
+
+
+    /// <summary>
+    /// Courses open for registration
+    /// </summary>
+    /// <returns></returns>
+    public ActionResult Courses()
         {
             ModelState.Clear();
             return View(courseRepository.GetAllCourses());
@@ -115,5 +170,28 @@ namespace AdmissionManagementSystem.Controllers
             }
             return false;
         }
+        /// <summary>
+        /// To change password
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ChangePassword(string oldPassword, string newPassword)
+        {
+            int studentId = (int)Session["StudentID"];
+
+            if (studentRepository.ChangePassword(studentId, oldPassword, newPassword))
+            {
+                TempData["SuccessMessage"] = "Password changed successfully!";
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Failed to change password. Please check your old password.";
+            }
+
+            return RedirectToAction("ChangePassword");
+        }
+
     }
 }

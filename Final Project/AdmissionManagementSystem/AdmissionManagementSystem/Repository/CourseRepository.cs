@@ -124,6 +124,7 @@ namespace AdmissionManagementSystem.Repository
             command.Parameters.AddWithValue("@FormCloseDate", course.FormCloseDate);
             command.Parameters.AddWithValue("@CourseCapacity", course.CourseCapacity);
             command.Parameters.AddWithValue("@CourseStatus", course.CourseStatus);
+            command.Parameters.AddWithValue("@CourseID", course.CourseID);
 
             connection.Open();
             int i = command.ExecuteNonQuery();
