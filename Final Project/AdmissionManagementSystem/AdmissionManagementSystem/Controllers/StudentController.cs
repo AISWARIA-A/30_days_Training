@@ -20,7 +20,12 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Home()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To get profile details
@@ -28,16 +33,24 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult ProfileDetails()
         {
-            int Id = (int)Session["StudentID"];
-            Student student = studentRepository.GetStudentById(Id);
-            return View(student);
+            try
+            {
+                int Id = (int)Session["StudentID"];
+                Student student = studentRepository.GetStudentById(Id);
+                return View(student);
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To update profile details
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             try
             {
@@ -45,40 +58,51 @@ namespace AdmissionManagementSystem.Controllers
                 var student = studentRepository.GetStudentById(studentId);
                 return View(student);
             }
-            catch (Exception ex)
+            catch (Exception Obj_Exception)
             {
                 TempData["ErrorMessage"] = "An error occurred while loading student data.";
+                Models.ErrorLogger.Log(Obj_Exception.Message);
                 return RedirectToAction("ProfileDetails");
             }
         }
 
-        // POST: Student/Edit
+        /// <summary>
+        /// Edit profile
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Student student)
         {
             try
             {
+                int studentId = (int)Session["StudentID"];
                 if (ModelState.IsValid)
                 {
-                    bool updateResult = studentRepository.UpdateUser(student);
+                    int updateResult = studentRepository.UpdateUser(student, studentId);
 
-                    if (updateResult)
+                    if (updateResult == 1)
                     {
-                        TempData["SuccessMessage"] = "Student information updated successfully!";
                         return RedirectToAction("ProfileDetails");
                     }
                     else
                     {
                         TempData["ErrorMessage"] = "Failed to update student information. Please try again.";
+                        return RedirectToAction("Edit");
                     }
                 }
-                return View(student); 
+                else
+                    {
+                        TempData["ErrorMessage"] = "Failed to update student information. Please try again.";
+                        return RedirectToAction("Edit");
+                    }
             }
-            catch (Exception ex)
+            catch (Exception Obj_Exception)
             {
                 TempData["ErrorMessage"] = "An error occurred while updating student information.";
-                return View(student); 
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return View("ProfileDetails"); 
             }
         }
 
@@ -89,8 +113,16 @@ namespace AdmissionManagementSystem.Controllers
     /// <returns></returns>
     public ActionResult Courses()
         {
-            ModelState.Clear();
-            return View(courseRepository.GetAllCourses());
+            try
+            {
+                ModelState.Clear();
+                return View(courseRepository.GetAllCourses());
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Apply for a course
@@ -100,18 +132,26 @@ namespace AdmissionManagementSystem.Controllers
         [HttpPost]
         public ActionResult ApplyForCourse(int id)
         {
-            int SId = (int)Session["StudentID"];
-            bool applicationResult = studentRepository.ApplyCourse(id, SId);
+            try
+            {
+                int SId = (int)Session["StudentID"];
+                bool applicationResult = studentRepository.ApplyCourse(id, SId);
 
-            if (applicationResult)
-            {
-                TempData["SuccessMessage"] = "Course application successful!";
-                return RedirectToAction("Courses");
+                if (applicationResult)
+                {
+                    TempData["SuccessMessage"] = "Course application successful!";
+                    return RedirectToAction("AppliedCourses");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Course application failed. Please try again.";
+                    return RedirectToAction("AppliedCourses");
+                }
             }
-            else
+            catch (Exception Obj_Exception)
             {
-                TempData["ErrorMessage"] = "Course application failed. Please try again.";
-                return RedirectToAction("Courses");
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
         }
         /// <summary>
@@ -120,9 +160,17 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AppliedCourses()
         {
-            int studentId = (int)Session["StudentID"];
-            List<AppliedCourse> appliedCourses = studentRepository.GetAppliedCoursesByStudentId(studentId);
-            return View(appliedCourses);
+            try
+            {
+                int studentId = (int)Session["StudentID"];
+                List<AppliedCourse> appliedCourses = studentRepository.GetAppliedCoursesByStudentId(studentId);
+                return View(appliedCourses);
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Insert education details
@@ -130,14 +178,27 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult InsertEducation()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         [HttpPost]
         public ActionResult InsertEducation(EducationDetails education, HttpPostedFileBase image1, HttpPostedFileBase image2, HttpPostedFileBase image3)
         {
-            int studentId = (int)Session["StudentID"];
-            educationRepository.Insert(education, image1, image2, image3, studentId);
-            return RedirectToAction("EducationDetails");
+            try
+            {
+                int studentId = (int)Session["StudentID"];
+                educationRepository.Insert(education, image1, image2, image3, studentId);
+                return RedirectToAction("EducationDetails");
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// View education details
@@ -145,8 +206,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult EducationDetails()
         {
-            int studentId = (int)Session["StudentID"];
-            return View(educationRepository.GetEducationDetails(studentId));
+            try
+            {
+                int studentId = (int)Session["StudentID"];
+                return View(educationRepository.GetEducationDetails(studentId));
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
 
@@ -176,22 +245,39 @@ namespace AdmissionManagementSystem.Controllers
         /// <param name="oldPassword"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult ChangePassword(string oldPassword, string newPassword)
+        public ActionResult ChangePassword()
         {
-            int studentId = (int)Session["StudentID"];
-
-            if (studentRepository.ChangePassword(studentId, oldPassword, newPassword))
+            try { return View(); }
+            catch (Exception Obj_Exception)
             {
-                TempData["SuccessMessage"] = "Password changed successfully!";
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Failed to change password. Please check your old password.";
-            }
-
-            return RedirectToAction("ChangePassword");
         }
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePassword changePassword)
+        {
+            try
+            {
+                int studentId = (int)Session["StudentID"];
 
+                int result = studentRepository.ChangePassword(studentId, changePassword);
+                if (result == 1)
+                {
+                    ViewBag.ErrorMessage = "Password updated successfully!!";
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Failed to change password. Please check your old password.";
+                }
+
+                return View("ChangePassword");
+            }
+            catch (Exception Obj_Exception)
+            {
+                Models.ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
+        }
     }
 }

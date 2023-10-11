@@ -35,7 +35,7 @@ namespace AdmissionManagementSystem.Models
         [StringLength(15, ErrorMessage = "Phone number must be up to 15 characters.")]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("Email address")]
+        [DisplayName("E-mail address")]
         [Required(ErrorMessage = "Email address is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [StringLength(100, ErrorMessage = "Email address must be up to 100 characters.")]
@@ -54,13 +54,11 @@ namespace AdmissionManagementSystem.Models
         public string City { get; set; }
 
         [DisplayName("Username")]
-        [Required(ErrorMessage = "Username is required.")]
         [StringLength(50, ErrorMessage = "Username must be between 1 and 50 characters.", MinimumLength = 1)]
         [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "Only letters and numbers are allowed in the username.")]
         public string Username { get; set; }
 
         [DisplayName("Password")]
-        [Required(ErrorMessage = "Password is required.")]
         [StringLength(255, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }

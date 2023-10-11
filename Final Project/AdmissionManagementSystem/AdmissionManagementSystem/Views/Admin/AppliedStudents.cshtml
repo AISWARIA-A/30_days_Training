@@ -4,83 +4,114 @@
     ViewBag.Title = "AppliedStudents";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<head>
-    <title>Applied students</title>
-</head>
-<h2>Applied students</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+@if (Session["Username"] != null)
+{
+    <head>
+        <title>Applied students</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="~/Content/CSS/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <link href="~/Content/Theme/css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    <h2>Applied students</h2>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <div class="manage" style="display:flex">
-                    @Html.ActionLink("View student details", "AppliedStudentDetails", new { id = item.StudentID }) |&nbsp
-                    @using (Html.BeginForm("RejectStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SeatsLeft)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Reject application" class="btn btn-default" style="padding: 0; color: #4e73df;"/>|&nbsp
-                        </div>
-                    }
-                    @using (Html.BeginForm("AcceptStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatsLeft)
+                </td>
+                <td>
+                    <div class="manage" style="display:flex">
+                        @Html.ActionLink("View student ", "AppliedStudentDetails", new { id = item.StudentID }) &nbsp; &nbsp;
+                        @using (Html.BeginForm("RejectStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Accept application" class="btn btn-default" style="padding: 0; color: #4e73df;"/>
-                        </div>
-                    }
-                </div>
-            </td>
-        </tr>
-    }
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Reject application" class="btn btn-default" style="padding: 0; color: #4e73df;" />&nbsp;
+                            </div>
+                        }
+                        @using (Html.BeginForm("AcceptStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
 
-</table>
-<div id="alertMessage" class="alert alert-dismissible" style="display:none;">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <span id="alertText"></span>
-</div>
-<script>
-    $(document).ready(function () {
-        var alertClass = '@TempData["AlertClass"]';
-        var alertMessage = '@TempData["AlertMessage"]';
-
-        if (alertClass && alertMessage) {
-            var alertDiv = $("#alertMessage");
-            alertDiv.addClass(alertClass);
-            $("#alertText").text(alertMessage);
-            alertDiv.show();
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Accept application" class="btn btn-default" style="padding: 0; color: #4e73df;" />
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
         }
-    });
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </table>
+    <div id="alertMessage" class="alert alert-dismissible" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <span id="alertText"></span>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+
+                $.ajax({
+                    type: form.attr("method"),
+                    url: form.attr("action"),
+                    data: form.serialize(),
+                    success: function () {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+}
+else
+{
+    Layout = null;
+    <p>Session expired</p>
+}

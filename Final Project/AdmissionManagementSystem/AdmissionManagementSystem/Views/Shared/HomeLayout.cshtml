@@ -27,13 +27,7 @@
             @Html.ActionLink("About us", "AboutUs", "Home", new { area = "" }, new { @class = "navigation-text" })
             @Html.ActionLink("Contact us", "ContactUs", "Home", new { area = "" }, new { @class = "navigation-text" })
             @Html.ActionLink("Sign up", "Student", "Home", new { area = "" }, new { @class = "navigation-text" })
-            <div class="subnav">
-                <a href="#" class="subnavbtn">Sign in <i class="fa fa-caret-down"></i></a>
-                <div class="subnav-content">
-                    @Html.ActionLink("Student", "Login", "Home", new { area = "" }, new { @class = "navigation-text" })
-                    @Html.ActionLink("Admin", "Login", "Home", new { area = "" }, new { @class = "navigation-text" })
-                </div>
-            </div>
+            @Html.ActionLink("Sign in", "Login", "Home", new { area = "" }, new { @class = "navigation-text" })
         </div>
     </div>
     <div>

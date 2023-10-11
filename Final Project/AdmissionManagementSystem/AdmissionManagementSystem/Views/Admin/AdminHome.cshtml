@@ -5,12 +5,19 @@
 }
 
 
-<!-- Content Row -->
-<div class="row">
-    <p>
-        <b>Getting Started:</b>
-        <br />
-        To get started, explore the quick links on the sidebar, where you can manage courses, review applications, and access student records.
-    </p>
-    <img src="~/Content/Images/c2.jpg" style="width:100%; height:500px; margin-bottom:0px;" />
-</div>
+@if (Session["Username"] != null)
+{
+    <div class="row">
+        <p>
+            <b>Getting Started:</b>
+            <br />
+            To get started, explore the quick links on the sidebar, where you can manage courses, review applications, and access student records.
+        </p>
+        <img src="~/Content/Images/c2.jpg" style="width:100%; height:500px; margin-bottom:0px;" />
+    </div>
+}
+else
+{
+    Layout = null;
+    <p>Session expired</p>
+}

@@ -5,70 +5,69 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<html>
-<head>
-    <title>Delete message?</title>
-</head>
-<body>
-    <h2>Delete Message</h2>
+@if (Session["Username"] != null)
+{
+    <html>
+    <head>
+        <title>Delete message?</title>
+    </head>
+    <body>
 
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Message</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Subject)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Subject)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Subject)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.MessageText)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.MessageText)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.MessageText)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.MessageText)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.DateTime)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.DateTime)
-            </dd>
+            </dl>
 
-        </dl>
+            @using (Html.BeginForm("MessageDeleteConfirm", "Admin", new { id = Model.MessageID }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-        @using (Html.BeginForm("MessageDeleteConfirm", "Admin", new { id = Model.MessageID }, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Messages")
-            </div>
-        }
-    </div>
-</body>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-primary" /> |
+                    @Html.ActionLink("Back to List", "Messages")
+                </div>
+            }
+        </div>
+    </body>
 </html>
+}
+else
+{
+Layout = null;
+<p>Session expired</p>
+}
 

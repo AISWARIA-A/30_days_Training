@@ -7,6 +7,7 @@
 
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,7 +67,7 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Manage students:</h6>
-                    <a class="collapse-item" href="">Students list</a>
+                    <a class="collapse-item" href="@Url.Action("Students","Admin")">Students list</a>
                 </div>
             </div>
         </li>
@@ -105,8 +106,7 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Manage admins:</h6>
-                    <a class="collapse-item" href=@Url.Action("AddAdmin", "Admin")>Add new admin</a>
-                    <a class="collapse-item" href="forgot-password.html">Update Password</a>
+                    <a class="collapse-item" href="@Url.Action("AddAdmin", "Admin")">Add new admin</a>
                 </div>
             </div>
         </li>
@@ -122,6 +122,7 @@
 
     </ul>
     <!-- End of Sidebar -->
+   
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -158,10 +159,14 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="@Url.Action("ChangePassword","Admin")">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Change password
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Sign out
                             </a>
                         </div>
                     </li>
@@ -190,6 +195,7 @@
         <!-- End of Footer -->
 
     </div>
+        </div>
     <!-- End of Content Wrapper -->
 
 </div>
@@ -213,7 +219,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="@Url.Action("Logout", "Admin")">Logout</a>
+                <a class="btn btn-primary" href="@Url.Action("Logout", "Admin")">Sign out</a>
             </div>
         </div>
     </div>

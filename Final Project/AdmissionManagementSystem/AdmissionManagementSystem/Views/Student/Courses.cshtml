@@ -5,71 +5,86 @@
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
 
-<html>
-<head>
-    <title>Opened courses</title>
-</head>
-<body>
-    <h2>Courses open for application</h2>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FormOpenDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FormCloseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseStatus)
-            </th>
-            <th></th>
-        </tr>
+@if (Session["Username"] != null)
+{
+    <html>
+    <head>
+        <title>Opened courses</title>
+        <link href="~/Content/CSS/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <link href="~/Content/Theme/css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h2>Courses open for application</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FormOpenDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FormCloseDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseCapacity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseStatus)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FormOpenDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FormCloseDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseStatus)
-                </td>
-                <td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormOpenDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormCloseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCapacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseStatus)
+                    </td>
+                    <td>
 
-                    @using (Html.BeginForm("ApplyForCourse", "Student", new { id = item.CourseID }, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+                        @using (Html.BeginForm("ApplyForCourse", "Student", new { id = item.CourseID }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Apply now" class="btn btn-default" /> 
-                        </div>
-                    }
-                </td>
-            </tr>
-        }
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Apply now" class="btn btn-primary" />
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
 
-    </table>
+        </table>
 
-</body>
+    </body>
 </html>
+}
+else
+{
+Layout = null;
+<p>Session expired</p>
+}

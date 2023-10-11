@@ -20,7 +20,12 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Home()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// About us page
@@ -28,7 +33,12 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AboutUs()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Contact us page
@@ -42,6 +52,7 @@ namespace AdmissionManagementSystem.Controllers
             }
             catch (Exception Obj_Exception)
             {
+                ErrorLogger.Log(Obj_Exception.Message);
                 return null;
             }
         }
@@ -49,8 +60,16 @@ namespace AdmissionManagementSystem.Controllers
         [HttpPost]
         public ActionResult ContactUs(Message message)
         {
-            messageRepository.AddMessages(message);
-            return RedirectToAction("ContactUs");
+            try
+            {
+                messageRepository.AddMessages(message);
+                return RedirectToAction("ContactUs");
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Registraion page for students
@@ -58,14 +77,27 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Student()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         [HttpPost]
         public ActionResult Student(Student student)
         {
-            studentRepository.AddStudent(student);
-            return RedirectToAction("Login");
+            try
+            {
+                studentRepository.AddStudent(student);
+                return RedirectToAction("Login");
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Login page for admin and student
@@ -73,42 +105,51 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Login()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            if (ModelState.IsValid)
+            try
             {
-                int adminId = loginRepository.AuthenticateAdmin(login);
-
-                if (adminId > 0)
+                if (ModelState.IsValid)
                 {
-                    Session["AdminID"] = adminId;
-                    Session["Username"] = login.Username.ToString();
-                    return RedirectToAction("AdminHome", "Admin");
+                    int adminId = loginRepository.AuthenticateAdmin(login);
+
+                    if (adminId > 0)
+                    {
+                        Session["AdminID"] = adminId;
+                        Session["Username"] = login.Username.ToString();
+                        return RedirectToAction("AdminHome", "Admin");
+                    }
+
+                    int studentId = loginRepository.AuthenticateStudent(login);
+
+                    if (studentId > 0)
+                    {
+                        Session["StudentID"] = studentId;
+                        Session["Username"] = login.Username.ToString();
+                        return RedirectToAction("Home", "Student");
+                    }
+
+                    ViewBag.ErrorMessage = "Invalid username or password";
                 }
 
-                int studentId = loginRepository.AuthenticateStudent(login);
 
-                if (studentId > 0)
-                {
-                    Session["StudentID"] = studentId;
-                    Session["Username"] = login.Username.ToString();
-                    return RedirectToAction("Home", "Student");
-                }
-
-                ViewBag.ErrorMessage = "Invalid username or password";
+                return View("Login");
             }
-
-            
-            return View("Login");
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
-
-
-
-
 
         public ActionResult Index()
         {

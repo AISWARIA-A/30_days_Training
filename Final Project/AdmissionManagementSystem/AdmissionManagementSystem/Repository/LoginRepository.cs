@@ -12,54 +12,70 @@ namespace AdmissionManagementSystem.Repository
     public class LoginRepository
     {
         private SqlConnection connection;
-
+        /// <summary>
+        /// connection
+        /// </summary>
         private void Connection()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["databaseConnection"].ToString();
             connection = new SqlConnection(connectionString);
         }
-
+        /// <summary>
+        /// Admin authenticattion
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public int AuthenticateAdmin(Login login)
         {
-            Connection();
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand("SPI_AuthenticateAdmin", connection))
+            try
             {
-                command.CommandType = CommandType.StoredProcedure;
+                Connection();
+                connection.Open();
 
-                command.Parameters.AddWithValue("@Username", login.Username);
-                command.Parameters.AddWithValue("@Password", login.Password);
+                using (SqlCommand command = new SqlCommand("SPI_AuthenticateAdmin", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
 
-                int adminId = (int)command.ExecuteScalar();
+                    command.Parameters.AddWithValue("@Username", login.Username);
+                    command.Parameters.AddWithValue("@Password", login.Password);
 
-                connection.Close();
-                return adminId;
+                    int adminId = (int)command.ExecuteScalar();
+
+                    connection.Close();
+                    return adminId;
+                }
             }
+            finally { connection.Close(); }
         }
-
-
-
+        /// <summary>
+        /// To authenticate student login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public int AuthenticateStudent(Login login)
         {
-           
-            Connection ();
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand("SPI_AuthenticateStudent", connection))
+            try
             {
-                command.CommandType = CommandType.StoredProcedure;
+                Connection();
+                connection.Open();
 
-                command.Parameters.AddWithValue("@Username", login.Username);
-                command.Parameters.AddWithValue("@Password", login.Password);
+                using (SqlCommand command = new SqlCommand("SPI_AuthenticateStudent", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
 
-                int studentId = (int)command.ExecuteScalar();
+                    command.Parameters.AddWithValue("@Username", login.Username);
+                    command.Parameters.AddWithValue("@Password", login.Password);
 
-                connection.Close();
+                    int studentId = (int)command.ExecuteScalar();
 
-                return studentId;
+                    connection.Close();
+
+                    return studentId;
+                }
             }
-            
+            finally {
+                connection.Close();
+            }
         }
     }
 }

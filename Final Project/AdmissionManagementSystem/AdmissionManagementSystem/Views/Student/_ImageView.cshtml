@@ -1,0 +1,12 @@
+﻿@model byte[]
+
+<div>
+    @if (Model != null && Model.Length > 0)
+    {
+        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model)" alt="Image Preview" />
+    }
+    else
+    {
+        <span>No image available</span>
+    }
+</div>

@@ -1,4 +1,5 @@
-﻿function Checkfirstname() {
+﻿//first name validation
+function Checkfirstname() {
     var isFname = /^[a-zA-Z]+$/;
     let fnameinput = document.getElementById("fname");
 
@@ -12,7 +13,21 @@
         setSuccess(fnameinput);
     }
 }
+//Name validation
+function Checkname() {
+    var isFname = /^[a-zA-Z]+$/;
+    let fnameinput = document.getElementById("name");
 
+    if (fnameinput.value.trim() === "") {
+        setError(fnameinput, "Empty name");
+    }
+    else if (!isFname.test(fnameinput.value.trim())) {
+        setError(fnameinput, 'Name cannot be a number or special characters');
+    }
+    else {
+        setSuccess(fnameinput);
+    }
+}
 //Lastname validation
 function Checklastname() {
     var isLname = /^[a-zA-Z]+$/;
@@ -108,19 +123,16 @@ function Checkstate() {
         setSuccess(nameinput);
     }
 }
-//Pincode validation
-function Checkpincode() {
-    var isPincode = /^\d{6}$/;
-    let pincodeinput = document.getElementById("pincode");
+//Old password validation
+function Checkoldpassword() {
+    var isOldPassword = /^\d{6}$/;
+    let oldPasswordinput = document.getElementById("oldpassword");
 
-    if (pincodeinput.value.trim() === "") {
-        setError(pincodeinput, "Empty pincode");
-    }
-    else if (!isPincode.test(pincodeinput.value.trim())) {
-        setError(pincodeinput, 'Enter a valid number');
+    if (oldPasswordinput.value.trim() === "") {
+        setError(oldPasswordinput, "Empty old password");
     }
     else {
-        setSuccess(pincodeinput);
+        setSuccess(oldPasswordinput);
     }
 }
 
@@ -139,7 +151,7 @@ function Checkusername() {
 
 //Password validation
 function Checkpassword() {
-    var isPwd = /^[A-Za-z]\w{7,14}$/;
+    var isPwd = /^[A-Za-z@_!]\w{7,14}$/;
     let pwdinput = document.getElementById("password");
     if (pwdinput.value.trim() === "") {
         setError(pwdinput, "Empty password");
@@ -183,18 +195,25 @@ function Checkdob() {
 
 //Future date disabled
 var todayDate = new Date();
-var month = todayDate.getMonth(); //04 - current month
-var year = todayDate.getUTCFullYear(); //2021 - current year
-var tdate = todayDate.getDate(); // 27 - current date 
+var maxDate = new Date();
+maxDate.setFullYear(todayDate.getFullYear() - 18);
+
+var month = maxDate.getMonth() + 1; // Add 1 to month to account for 0-based indexing
+var day = maxDate.getDate();
+
 if (month < 10) {
-    month = "0" + month //'0' + 4 = 04
+    month = "0" + month;
 }
-if (tdate < 10) {
-    tdate = "0" + tdate;
+
+if (day < 10) {
+    day = "0" + day;
 }
-var maxDate = year + "-" + month + "-" + tdate;
-document.getElementById("dob").setAttribute("max", maxDate);
-document.getElementById("dob").setAttribute("min", "1900-01-01"); //age > 100+
+
+var formattedMaxDate = maxDate.getFullYear() + "-" + month + "-" + day;
+
+document.getElementById("dob").setAttribute("max", formattedMaxDate);
+document.getElementById("dob").setAttribute("min", "1900-01-01");
+
 
 
 //Submit button validation
@@ -207,11 +226,12 @@ function Checkvalidation() {
     Checkaddress();
     Checkcity();
     Checkstate()
-    Checkpincode();
+    CheckoldPassword();
     Checkusername();
     Checkpassword();
     Checkconfirmpassword();
     Checkdob();
+    Checkname();
 }
 
 

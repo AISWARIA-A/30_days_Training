@@ -4,57 +4,71 @@
     ViewBag.Title = "Messages";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+@if (Session["Username"] != null)
+{
+    <html>
+    <head>
+        <title>Messages</title>
+        <link href="~/Content/CSS/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <link href="~/Content/Theme/css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h2>Messages</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subject)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MessageText)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
-<html>
-<head>
-    <title>Messages</title>
-</head>
-<body>
-    <h2>Messages</h2>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MessageText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateTime)
-            </th>
-            <th></th>
-        </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteMessage", new { id = item.MessageID })
+                    </td>
+                </tr>
+            }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MessageText)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTime)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteMessage", new { id = item.MessageID })
-                </td>
-            </tr>
-        }
-
-    </table>
-</body>
+        </table>
+    </body>
 </html>
+}
+else
+{
+Layout = null;
+<p>Session expired</p>
+}

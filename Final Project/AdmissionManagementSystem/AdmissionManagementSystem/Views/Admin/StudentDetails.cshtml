@@ -4,108 +4,70 @@
     ViewBag.Title = "StudentDetails";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<html>
-<head>
-    <title>Student details</title>
-</head>
-<body>
-    <div>
-        <h4>Student details</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DateOfBirth)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.EmailAddress)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.State)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Username)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Username)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Back to List", "Students")
-    </p>
-</body>
+@if (Session["Username"] != null)
+{
+    <html>
+    <head>
+        <title>Student details</title>
+    </head>
+    <body>
+        <div>
+            <h4>Student details</h4>
+            <hr />
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <td>@Html.DisplayFor(model => model.FirstName)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                        <td>@Html.DisplayFor(model => model.LastName)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                        <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                        <td>@Html.DisplayFor(model => model.Gender)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
+                        <td>@Html.DisplayFor(model => model.EmailAddress)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Address)</th>
+                        <td>@Html.DisplayFor(model => model.Address)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.State)</th>
+                        <td>@Html.DisplayFor(model => model.State)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.City)</th>
+                        <td>@Html.DisplayFor(model => model.City)</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Students")
+        </p>
+    </body>
 </html>
-
+}
+else
+{
+Layout = null;
+<p>Session expired</p>
+}

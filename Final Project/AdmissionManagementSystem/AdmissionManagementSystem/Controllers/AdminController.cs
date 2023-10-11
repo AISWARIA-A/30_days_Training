@@ -25,7 +25,15 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AdminHome()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Registered student details page
@@ -33,8 +41,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Students() 
         {
-            ModelState.Clear();
-            return View(studentRepository.GetAllStudents());
+            try
+            {
+                ModelState.Clear();
+                return View(studentRepository.GetAllStudents());
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To get details of a single student
@@ -43,8 +59,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult StudentDetails(int id)
         {
-            Student student = studentRepository.GetStudentById(id);
-            return View(student);
+            try
+            {
+                Student student = studentRepository.GetStudentById(id);
+                return View(student);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To delete a student account
@@ -54,8 +78,16 @@ namespace AdmissionManagementSystem.Controllers
         [HttpGet]
         public ActionResult DeleteStudent(int id)
         {
-            var item = studentRepository.GetStudentById(id);
-            return View(item);
+            try
+            {
+                var item = studentRepository.GetStudentById(id);
+                return View(item);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         [HttpPost]
@@ -63,14 +95,13 @@ namespace AdmissionManagementSystem.Controllers
         {
             try
             {
-                // Perform the deletion
                 studentRepository.DeleteStudentById(id);
                 return RedirectToAction("Students");
             }
-            catch (Exception ex)
+            catch (Exception Obj_Exception)
             {
-                ModelState.AddModelError("", "An error occurred while deleting the item.");
-                return View("DeleteStudent", id); 
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
         }
         /// <summary>
@@ -79,8 +110,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Messages()
         {
-            ModelState.Clear();
-            return View(messageRepository.GetAllMessages());
+            try
+            {
+                ModelState.Clear();
+                return View(messageRepository.GetAllMessages());
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To delete message
@@ -90,8 +129,16 @@ namespace AdmissionManagementSystem.Controllers
         [HttpGet]
         public ActionResult DeleteMessage(int id)
         {
-            var messageItem = messageRepository.GetMessageById(id);
-            return View(messageItem);
+            try
+            {
+                var messageItem = messageRepository.GetMessageById(id);
+                return View(messageItem);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         [HttpPost]
         public ActionResult MessageDeleteConfirm(int id)
@@ -101,10 +148,10 @@ namespace AdmissionManagementSystem.Controllers
                 messageRepository.DeleteMessageById(id);
                 return RedirectToAction("Messages");
             }
-            catch (Exception ex)
+            catch (Exception Obj_Exception)
             {
-                ModelState.AddModelError("", "An error occured while deleting the item");
-                return View("DeleteMessage", id);
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
         }
         /// <summary>
@@ -113,8 +160,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult Courses()
         {
-            ModelState.Clear();
-            return View(courseRepository.GetAllCourses());
+            try
+            {
+                ModelState.Clear();
+                return View(courseRepository.GetAllCourses());
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Create course page
@@ -122,14 +177,27 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult CreateCourse()
         {
-            return View();
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         [HttpPost]
         public ActionResult CreateCourse(Course course)
         {
-            courseRepository.AddCourses(course);
-            return RedirectToAction("Courses");
+            try
+            {
+                courseRepository.AddCourses(course);
+                return RedirectToAction("Courses");
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// To edit a course 
@@ -138,7 +206,12 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult EditCourse(int id)
         {
-            return View(courseRepository.GetAllCourses().Find(course => course.CourseID == id));
+            try { return View(courseRepository.GetAllCourses().Find(course => course.CourseID == id)); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         [HttpPost]
@@ -149,9 +222,10 @@ namespace AdmissionManagementSystem.Controllers
                 courseRepository.EditCourse(course);
                 return RedirectToAction("Courses");
             }
-            catch
+            catch (Exception Obj_Exception)
             {
-                return View();
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
         }
         /// <summary>
@@ -162,8 +236,16 @@ namespace AdmissionManagementSystem.Controllers
         [HttpGet]
         public ActionResult DeleteCourse(int id) 
         {
-            var courseItem = courseRepository.GetCourseById(id);
-            return View(courseItem); 
+            try
+            {
+                var courseItem = courseRepository.GetCourseById(id);
+                return View(courseItem);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         [HttpPost]
         public ActionResult CourseDeleteConfirm(int id) 
@@ -173,10 +255,10 @@ namespace AdmissionManagementSystem.Controllers
                 courseRepository.DeleteCourseById(id);
                 return RedirectToAction("Courses"); 
             }
-            catch (Exception ex) 
+            catch (Exception Obj_Exception)
             {
-                ModelState.AddModelError("", "An error occured while deleting the item");
-                return View("DeleteCourse", id); 
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
         }
         /// <summary>
@@ -191,8 +273,16 @@ namespace AdmissionManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddAdmin(Admin admin)
         {
-            adminRepository.AddAdmin(admin);
-            return RedirectToAction("AddAdmin");
+            try
+            {
+                adminRepository.AddAdmin(admin);
+                return RedirectToAction("AddAdmin");
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
 
         }
         /// <summary>
@@ -201,8 +291,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AppliedCourses()
         {
-            ModelState.Clear();
-            return View(courseRepository.GetAllCourses());
+            try
+            {
+                ModelState.Clear();
+                return View(courseRepository.GetAllCourses());
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// Students applied in a course
@@ -210,8 +308,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AppliedStudents(int id)
         {
-            List<AppliedStudent> appliedStudents = courseRepository.GetAppliedStudentsByCourseID(id);
-            return View(appliedStudents);
+            try
+            {
+                List<AppliedStudent> appliedStudents = courseRepository.GetAppliedStudentsByCourseIDs(id);
+                return View(appliedStudents);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// View details of applied student
@@ -220,8 +326,16 @@ namespace AdmissionManagementSystem.Controllers
         /// <returns></returns>
         public ActionResult AppliedStudentDetails(int id)
         {
-            Student student = studentRepository.GetStudentById(id);
-            return View(student);
+            try
+            {
+                Student student = studentRepository.GetStudentById(id);
+                return View(student);
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         /// <summary>
         /// reject an application
@@ -231,19 +345,24 @@ namespace AdmissionManagementSystem.Controllers
         [HttpPost]
         public ActionResult RejectStudent(int applicationId)
         {
-            bool rejectionResult = courseRepository.RejectStudent(applicationId);
+            try
+            {
+                bool rejectionResult = courseRepository.RejectStudent(applicationId);
 
-            if (rejectionResult)
-            {
-                TempData["AlertClass"] = "alert-success";
-                TempData["AlertMessage"] = "Student application rejected successfully!";
+                if (rejectionResult)
+                {
+                    return Json(new { success = true, message = "Student application rejected successfully!" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Failed to reject student application. Please try again." });
+                }
             }
-            else
+            catch (Exception Obj_Exception)
             {
-                TempData["AlertClass"] = "alert-danger";
-                TempData["AlertMessage"] = "Failed to reject student application. Please try again.";
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
             }
-            return RedirectToAction("AppliedCourses", "Admin");
         }
         /// <summary>
         /// accept an application
@@ -253,18 +372,24 @@ namespace AdmissionManagementSystem.Controllers
         [HttpPost]
         public ActionResult AcceptStudent(int applicationId)
         {
-            bool acceptanceResult = courseRepository.AcceptStudent(applicationId);
-
-            if (acceptanceResult)
+            try
             {
-                TempData["SuccessMessage"] = "Student application accepted successfully!";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Failed to accept student application. Please try again.";
-            }
+                bool acceptanceResult = courseRepository.AcceptStudent(applicationId);
 
-            return RedirectToAction("AppliedCourses", "Admin");
+                if (acceptanceResult)
+                {
+                    return Json(new { success = true, message = "Student application accepted successfully!" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Failed to accept student application. Please try again." });
+                }
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
 
         /// <summary>
@@ -274,13 +399,55 @@ namespace AdmissionManagementSystem.Controllers
 
         public ActionResult EducationDetails(int studentId)
         {
-            return View(educationRepository.GetEducationDetails(studentId));
+            try { return View(educationRepository.GetEducationDetails(studentId)); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
         }
         public ActionResult Logout()
         {
             Session.Abandon();
             return RedirectToAction("Home", "Home");
         }
+        /// <summary>
+        /// change admin password
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangePassword()
+        {
+            try { return View(); }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(Models.ChangePassword changePassword)
+        {
+            try
+            {
+                int adminId = (int)Session["AdminID"];
 
+                int result = adminRepository.ChangePassword(adminId, changePassword);
+                if (result == 1)
+                {
+                    ViewBag.ErrorMessage = "Password updated successfully!!";
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Failed to change password. Please check your old password.";
+                }
+
+                return View("ChangePassword");
+            }
+            catch (Exception Obj_Exception)
+            {
+                ErrorLogger.Log(Obj_Exception.Message);
+                return null;
+            }
+        }
     }
 }

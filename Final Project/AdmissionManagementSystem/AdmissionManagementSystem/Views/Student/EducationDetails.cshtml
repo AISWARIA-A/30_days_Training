@@ -4,79 +4,134 @@
     ViewBag.Title = "EducationDetails";
     Layout = "~/Views/Shared/StudentLayout.cshtml";
 }
-<head><title>Education details</title></head>
+@if (Session["Username"] != null)
+{
+    <head>
+        <title>Education details</title>
+    </head>
 
-<div>
-    <h4>Education details</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenthSchool)
-        </dt>
+    <div>
+        <h4>Education details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenthSchool)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenthSchool)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TenthSchool)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenthCGPA)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TenthCGPA)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenthCGPA)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TenthCGPA)
+            </dd>
 
-        <dt>
-            @Html.DisplayFor(model => model.TenthCertificate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TenthCertificate)
+            </dt>
+            <dd>
+                @if (Model.PlusTwoCertificate != null && Model.PlusTwoCertificate.Length > 0)
+                {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.TenthCertificate)" alt="Tenth Certificate" />
+                }
+                else
+                {
+                    <span>No Certificate available</span>
+                }
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlusTwoSchool)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlusTwoSchool)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlusTwoSchool)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlusTwoCGPA)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlusTwoSchool)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlusTwoCGPA)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlusTwoCGPA)
+            </dt>
 
-        <dt>
-            @Html.DisplayFor(model => model.PlusTwoCertificate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlusTwoCGPA)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegreeCollege)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlusTwoCertificate)
+            </dt>
+            <dd>
+                @if (Model.PlusTwoCertificate != null && Model.PlusTwoCertificate.Length > 0)
+                {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.PlusTwoCertificate)" alt="Plus Two Certificate" />
+                }
+                else
+                {
+                    <span>No Plus Two Certificate available</span>
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegreeCollege)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegreeCGPA)
-        </dt>
+            @if (!string.IsNullOrEmpty(Model.DegreeCollege))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegreeCollege)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegreeCGPA)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.DegreeCollege)
+                </dd>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegreeStream)
-        </dt>
+            @if (!string.IsNullOrEmpty(Model.DegreeCGPA.ToString()))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegreeCGPA)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegreeStream)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.DegreeCGPA)
+                </dd>
+            }
 
-        <dt>
-            @Html.DisplayFor(model => model.DegreeCertificate)
-        </dt>
+            @if (!string.IsNullOrEmpty(Model.DegreeStream))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegreeStream)
+                </dt>
 
-    </dl>
-</div>
+                <dd>
+                    @Html.DisplayFor(model => model.DegreeStream)
+                </dd>
+            }
+
+            @if (Model.DegreeCertificate != null && Model.DegreeCertificate.Length > 0)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegreeCertificate)
+                </dt>
+
+                <dd>
+                    @if (Model.DegreeCertificate != null && Model.DegreeCertificate.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.DegreeCertificate)" alt="Degree Certificate" />
+                    }
+                    else
+                    {
+                        <span>No Degree Certificate available</span>
+                    }
+                </dd>
+            }
+
+        </dl>
+    </div>
+}
+else
+{
+    Layout = null;
+    <p>Session expired</p>
+}

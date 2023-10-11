@@ -23,5 +23,7 @@ namespace AdmissionManagementSystem.Models
 
         [DisplayName("Student ID")]
         public int StudentID { get; set; }
+
+        public int SeatsLeft { get; set; }
     }
 }
