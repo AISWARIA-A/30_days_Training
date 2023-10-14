@@ -37,6 +37,8 @@
                     @Html.DisplayNameFor(model => model.SeatsLeft)
                 </th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -56,12 +58,16 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SeatsLeft)
+                    @if (item == Model.First())
+                    {
+                        @Html.DisplayFor(modelItem => item.SeatsLeft)
+                    }
                 </td>
                 <td>
-                    <div class="manage" style="display:flex">
+                
                         @Html.ActionLink("View student ", "AppliedStudentDetails", new { id = item.StudentID }) &nbsp; &nbsp;
-                        @using (Html.BeginForm("RejectStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
+                </td>
+                 <td>   @using (Html.BeginForm("RejectStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
 
@@ -69,7 +75,8 @@
                                 <input type="submit" value="Reject application" class="btn btn-default" style="padding: 0; color: #4e73df;" />&nbsp;
                             </div>
                         }
-                        @using (Html.BeginForm("AcceptStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
+                </td>     
+                <td>@using (Html.BeginForm("AcceptStudent", "Admin", new { applicationId = item.ApplicationID }, FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
 
@@ -77,7 +84,7 @@
                                 <input type="submit" value="Accept application" class="btn btn-default" style="padding: 0; color: #4e73df;" />
                             </div>
                         }
-                    </div>
+                    
                 </td>
             </tr>
         }

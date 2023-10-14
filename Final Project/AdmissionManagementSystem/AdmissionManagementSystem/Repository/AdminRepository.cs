@@ -1,4 +1,5 @@
-﻿using AdmissionManagementSystem.Models;
+﻿using AdmissionManagementSystem.Common;
+using AdmissionManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,6 +13,7 @@ namespace AdmissionManagementSystem.Repository
     public class AdminRepository
     {
         private SqlConnection connection;
+        Password EncryptData = new Password();
         /// <summary>
         /// connection 
         /// </summary>
@@ -36,7 +38,7 @@ namespace AdmissionManagementSystem.Repository
                 command.Parameters.AddWithValue("@LastName", admin.LastName);
                 command.Parameters.AddWithValue("@EmailAddress", admin.EmailAddress);
                 command.Parameters.AddWithValue("@Username", admin.Username);
-                command.Parameters.AddWithValue("@Password", admin.Password);
+                command.Parameters.AddWithValue("@Password", EncryptData.Encode(admin.Password));
 
                 connection.Open();
                 int i = command.ExecuteNonQuery();
@@ -63,8 +65,8 @@ namespace AdmissionManagementSystem.Repository
                 SqlCommand command = new SqlCommand("SPU_ChangeAdminPassword", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@AdminID", adminId);
-                command.Parameters.AddWithValue("@OldPassword", changePassword.OldPassword);
-                command.Parameters.AddWithValue("@NewPassword", changePassword.NewPassword);
+                command.Parameters.AddWithValue("@OldPassword", EncryptData.Encode(changePassword.OldPassword));
+                command.Parameters.AddWithValue("@NewPassword", EncryptData.Encode(changePassword.NewPassword));
 
                 connection.Open();
                 int result = (int)command.ExecuteScalar();

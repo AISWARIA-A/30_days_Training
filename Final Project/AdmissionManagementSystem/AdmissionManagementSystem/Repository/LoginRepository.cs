@@ -1,4 +1,5 @@
-﻿using AdmissionManagementSystem.Models;
+﻿using AdmissionManagementSystem.Common;
+using AdmissionManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,6 +13,7 @@ namespace AdmissionManagementSystem.Repository
     public class LoginRepository
     {
         private SqlConnection connection;
+        Password EncryptData = new Password();
         /// <summary>
         /// connection
         /// </summary>
@@ -37,7 +39,7 @@ namespace AdmissionManagementSystem.Repository
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@Username", login.Username);
-                    command.Parameters.AddWithValue("@Password", login.Password);
+                    command.Parameters.AddWithValue("@Password", EncryptData.Encode(login.Password));
 
                     int adminId = (int)command.ExecuteScalar();
 
@@ -64,7 +66,7 @@ namespace AdmissionManagementSystem.Repository
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@Username", login.Username);
-                    command.Parameters.AddWithValue("@Password", login.Password);
+                    command.Parameters.AddWithValue("@Password", EncryptData.Encode(login.Password));
 
                     int studentId = (int)command.ExecuteScalar();
 

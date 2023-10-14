@@ -1,4 +1,5 @@
-﻿using AdmissionManagementSystem.Models;
+﻿using AdmissionManagementSystem.Common;
+using AdmissionManagementSystem.Models;
 using GSF.ErrorManagement;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace AdmissionManagementSystem.Repository
     public class StudentRepository
     {
         private SqlConnection connection;
+        Password EncryptData = new Password();
         /// <summary>
         /// connection
         /// </summary>
@@ -44,7 +46,7 @@ namespace AdmissionManagementSystem.Repository
                 command.Parameters.AddWithValue("@State", student.State);
                 command.Parameters.AddWithValue("@City", student.City);
                 command.Parameters.AddWithValue("@Username", student.Username);
-                command.Parameters.AddWithValue("@Password", student.Password);
+                command.Parameters.AddWithValue("@Password", EncryptData.Encode(student.Password));
 
                 connection.Open();
                 int i = command.ExecuteNonQuery();
@@ -290,14 +292,15 @@ namespace AdmissionManagementSystem.Repository
         /// <returns></returns>
         public int ChangePassword(int studentId, ChangePassword changePassword)
         {
+            Password EncryptData = new Password();
             try
             {
                 Connection();
                 SqlCommand command = new SqlCommand("SPU_ChangePassword", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@StudentID", studentId);
-                command.Parameters.AddWithValue("@OldPassword", changePassword.OldPassword);
-                command.Parameters.AddWithValue("@NewPassword", changePassword.NewPassword);
+                command.Parameters.AddWithValue("@OldPassword", EncryptData.Encode(changePassword.OldPassword));
+                command.Parameters.AddWithValue("@NewPassword", EncryptData.Encode(changePassword.NewPassword));
 
                 connection.Open();
                 int result = (int)command.ExecuteScalar();
@@ -309,8 +312,5 @@ namespace AdmissionManagementSystem.Repository
                 connection.Close();
             }
         }
-
-
-
     }
 }
